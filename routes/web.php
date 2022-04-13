@@ -31,6 +31,7 @@ Route::prefix('admin')->name('admin')->group(function (){
 
 
 
-    Route::resource('usuarios', UsuarioController::class);
+    Route::resource('users', UsuarioController::class);
+    Route::resource('freelancers', FreelancerController::class);
 
 });
