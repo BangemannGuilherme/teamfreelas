@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Login</title>
+    <title>TeamFreelas | Login</title>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -30,12 +30,24 @@
                 <h3>Bem vindo ao Painel do Admin</h3>
                 <p><b>TeamFreelas</b></p>
                 <p>Login in. To see it in action.</p>
-                <form class="m-t" role="form" action="index.html">
+                
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form class="m-t" role="form" method="POST" action="{{ route('admin.login') }}">
+                    @csrf
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Username" required="">
+                        <input type="user" class="form-control" placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" required="">
+                        <input type="password" class="form-control" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-success block full-width m-b">Login</button>
 

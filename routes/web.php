@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Admin\UsuarioController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +19,32 @@ use Admin\UsuarioController;
 
 
 // Admin Routes
-Route::prefix('admin')->name('admin')->group(function (){
-    Route::get('/', function () {
-        return view('admin/master');
+// Route::middleware(['web'])->group(function () {
+    Route::prefix('admin')->group(function (){
+        // Auth::routes();
+
+        // Route::get('/', function () {
+        //     return view('admin/master');
+        // });
+
+        Route::get('/', 'Admin\\AdminController@index')->name('admin');
+        Route::get('login', function () {
+            return view('admin/login');
+        });
+
+        Route::post('login', 'Admin\\AuthController@auth')->name('admin.login');
+
+        // Route::post('auth', AuthController::class);
+        // Route::post('auth', AuthController::class,'auth')->name('auth');
+
+
+        // Route::get('/login', 'Auth\AuthController@showLoginForm');
+        // Route::post('/login', 'Auth\AuthController@postLogin');
+        // Route::get('/logout', 'Auth\AuthController@logout');
+
+        // Route::post('auth', AuthController::class);
+        // Route::resource('users', UsuarioController::class);
+        // Route::resource('freelancers', FreelancerController::class);
+
     });
-    Route::get('login', function () {
-        return view('admin/login');
-    });
-
-
-
-    Route::resource('users', UsuarioController::class);
-    Route::resource('freelancers', FreelancerController::class);
-
-});
+// });
