@@ -14,7 +14,6 @@ Comandos:
 - php /var/www/teamfreelas/artisan serve ;
 
 
-
 ## License
 
 TeamFreelas
