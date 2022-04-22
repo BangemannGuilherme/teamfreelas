@@ -17,3 +17,7 @@ yarn-error.log
 /template
 temp1
 template
+.gitignore
+.env.example
+.styleci.yml
+.editorconfig

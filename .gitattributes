@@ -5,10 +5,6 @@
 *.html diff=html
 *.md diff=markdown
 *.php diff=php
-.gitignore
-.env.example
-.styleci.yml
-.editorconfig
 
 /.github export-ignore
 CHANGELOG.md export-ignore
