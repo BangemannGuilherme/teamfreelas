@@ -7,5 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Empresa extends Model
 {
-    use HasFactory;
+  /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'empresa';
+    protected $primaryKey = 'id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'id',
+        'nome',
+        'localizacao',
+        'created_at', 
+        'updated_at', 
+        'deleted_at'
+    ];
 }
