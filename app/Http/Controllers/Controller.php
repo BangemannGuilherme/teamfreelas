@@ -1,8 +1,9 @@
 <?php
 
-namespace Illuminate\Routing;
+namespace App\Http\Controllers;
 
 use BadMethodCallException;
+use Illuminate\Routing\ControllerMiddlewareOptions;
 
 abstract class Controller
 {

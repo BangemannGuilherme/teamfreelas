@@ -44,10 +44,10 @@
                 <form class="m-t" role="form" method="POST" action="{{ route('admin.login') }}">
                     @csrf
                     <div class="form-group">
-                        <input type="user" class="form-control" placeholder="Username">
+                        <input type="user" name="username" class="form-control" placeholder="Usuário">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Senha">
                     </div>
                     <button type="submit" class="btn btn-success block full-width m-b">Login</button>
 

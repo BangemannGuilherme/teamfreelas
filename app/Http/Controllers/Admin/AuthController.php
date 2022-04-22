@@ -5,31 +5,58 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
-{   
-    // public function __invoke(Request $request)
-    // {
-    //     //dump($request);
-    //     dd($request);
-    //     //return "test";
-    // }
+{
+    public function index()
+    {    
+        if (Auth::check())
+        {
+            return redirect()->intended('admin');
+        }
+        else
+        {
+            return view('admin/login');
+        }
+    }
 
     public function auth(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'password' => 'required'
+        ],
+        $messages = [
+            'required' => 'O campo :attribute é obrigatório.'
         ]);
- 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
- 
-            return redirect()->intended('dashboard');
+
+        $credentials = $validator->validated();
+
+        try {
+            if (Auth::attempt($credentials)) 
+            {
+                $request->session()->regenerate();
+
+                return redirect()->intended('admin');
+            }
+
+            return back()->withErrors([
+                'username' => 'A credencial fornecida está incorreta.',
+            ])->onlyInput('username');
+
+        } catch (\Exception $e) {
+            Log::error('[AuthController]: '.$e);
         }
- 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+    }
+
+    public function logout()
+    {
+        Session::flush();
+        Auth::logout();
+
+        return redirect('admin/login');
     }
 }
