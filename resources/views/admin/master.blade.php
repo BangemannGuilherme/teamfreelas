@@ -39,21 +39,22 @@
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                            <img alt="image" class="rounded-circle" src="/img/profile_small.jpg"/>
+                            {{-- <img alt="image" class="rounded-circle" src="/img/profile_small.jpg"/> --}}
+                            <img alt="image" src="/img/teamfreelas.png" style="width: 100%"/>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="/#">
-                                <span class="block m-t-xs font-bold">{{ Auth::user()->nome }}</span>
-                                <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                                <span class="block m-t-xs font-bold">{{ Auth::user()->nome }} {{ Auth::user()->sobrenome }}</span>
+                                <span class="text-muted text-xs block">{{ Auth::user()->username }}{{--<b class="caret"></b>--}}</span>
                             </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            {{-- <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
                                 <li><a class="dropdown-item" href="/contacts.html">Contacts</a></li>
                                 <li><a class="dropdown-item" href="/mailbox.html">Mailbox</a></li>
                                 <li class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="/login.html">Logout</a></li>
-                            </ul>
+                            </ul> --}}
                         </div>
                         <div class="logo-element">
-                            IN+
+                            TF+
                         </div>
                     </li>
                     <li>
@@ -71,111 +72,78 @@
                     <li>
                         <a href="/admin/reports"><i class="fas fa-file-alt"></i> <span class="nav-label">Relatórios</span></a>
                     </li>
-                    
+                </ul>
             </div>
         </nav>
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
-        <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="/#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" action="search_results.html">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="/#"><i class="fa fa-bars"></i> </a>
+                        <form role="search" class="navbar-form-custom" action="search_results.html">
+                            <div class="form-group">
+                                <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li style="padding: 20px">
+                            <span class="m-r-sm text-muted welcome-message">Seja Bem vindo ao Painel do Admin.</span>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.logout') }}">
+                                <i class="fa fa-sign-out"></i> Log out
+                            </a>
+                        </li>
+                        <li>
+                            <a class="right-sidebar-toggle">
+                                <i class="fa fa-tasks"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>                
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-sm-4">
+                    <h2>This is main title</h2>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">This is</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <strong>Breadcrumb</strong>
+                        </li>
+                    </ol>
                 </div>
-            </form>
-        </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li style="padding: 20px">
-                    <span class="m-r-sm text-muted welcome-message">Seja Bem vindo ao Painel do Admin.</span>
-                </li>
-                <li>
-                    <a href="{{ route('admin.logout') }}">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
-                <li>
-                    <a class="right-sidebar-toggle">
-                        <i class="fa fa-tasks"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div class="row  border-bottom white-bg dashboard-header">
+            </div>
 
-                    {{-- <div class="col-md-12">
-                        <h2>Bem-Vindo a TeamFreelas AdminPage</h2>
-                        <small>You have 42 messages and 6 notifications.</small>
-                        
+            <div class="wrapper wrapper-content">
+                <div class="animated fadeInRightBig">
+                    <h3 class="font-bold">This is page content</h3>
+                    <div class="error-desc">
+                        @yield('content')
+                        {{-- <br/><a href="index.html" class="btn btn-primary m-t">Dashboard</a> --}}
                     </div>
-                    <div class="col-md-6">
-                        <div class="flot-chart dashboard-chart">
-                            <div class="flot-chart-content" id="flot-dashboard-chart"></div>
-                        </div>
-                        <div class="row text-left">
-                            <div class="col">
-                                <div class=" m-l-md">
-                                <span class="h5 font-bold m-t block">$ 406,100</span>
-                                <small class="text-muted m-b block">Sales marketing report</small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <span class="h5 font-bold m-t block">$ 150,401</span>
-                                <small class="text-muted m-b block">Annual sales revenue</small>
-                            </div>
-                            <div class="col">
-                                <span class="h5 font-bold m-t block">$ 16,822</span>
-                                <small class="text-muted m-b block">Half-year revenue margin</small>
-                            </div>
+                </div>
+            </div>
 
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="statistic-box">
-                        <h4>
-                            Project Beta progress
-                        </h4>
-                        <p>
-                            You have two project with not compleated task.
-                        </p>
-                            <div class="row text-center">
-                                <div class="col-lg-6">
-                                    <canvas id="doughnutChart2" width="80" height="80" style="margin: 18px auto 0"></canvas>
-                                    <h5 >Kolter</h5>
-                                </div>
-                                <div class="col-lg-6">
-                                    <canvas id="doughnutChart" width="80" height="80" style="margin: 18px auto 0"></canvas>
-                                    <h5 >Maxtor</h5>
-                                </div>
-                            </div>
-                            <div class="m-t">
-                                <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
-                            </div>
-
-                        </div>
-                    </div>
-
-            </div> --}}
-        <div class="wrapper wrapper-content">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row conteiner">
+            {{-- <div class="wrapper wrapper-content">
+                <div class="row">
+                    <div class="col-lg-12">
                         @yield('content')
                     </div>
                 </div>
+            </div> --}}
+            <div class="footer">
+                <div class="float-right">
+                    10GB of <strong>250GB</strong> Free.
+                </div>
+                <div>
+                    <strong>Copyright</strong> TeamFreelas Company &copy; 2022-2023
+                </div>
             </div>
         </div>
-        <div class="footer">
-            <div class="float-right">
-                10GB of <strong>250GB</strong> Free.
-            </div>
-            <div>
-                <strong>Copyright</strong> TeamFreelas Company &copy; 2022
-            </div>
-        </div>
-    </div>
 
     <!-- Mainly scripts -->
     <script src="/js/jquery-3.1.1.min.js"></script>

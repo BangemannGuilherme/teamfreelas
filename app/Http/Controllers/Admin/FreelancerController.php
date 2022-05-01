@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Freelancer;
 use Illuminate\Http\Request;
 
 class FreelancerController extends Controller
@@ -24,7 +25,8 @@ class FreelancerController extends Controller
      */
     public function index()
     {
-        return view('admin/freelancer/index');
+        $freelancers = Freelancer::all();
+        return view('admin.freelancer.index', compact('freelancers'));
     }
 
     /**
