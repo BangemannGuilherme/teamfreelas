@@ -9,7 +9,7 @@
         <span style="color: red">Não</span>
         @endif
     </td>
-    {{-- <td>{{ Carbon\Carbon::parse($usuario->created_on)->format('d/m/Y H:i') }}</td> --}}
+    <td>{{ Carbon\Carbon::parse($usuario->created_at)->format('d/m/Y H:i') }}</td>
     <td>
         @if ($usuario->status)
         <span style="color: green">Sim</span>

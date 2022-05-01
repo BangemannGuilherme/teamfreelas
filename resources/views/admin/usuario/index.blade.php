@@ -36,7 +36,7 @@
                                 <th>Usuário</th>
                                 <th>Nome</th>
                                 <th>Admin</th>
-                                {{-- <th>Data de Criação</th> --}}
+                                <th>Data de Criação</th>
                                 <th>Ativo</th>
                             </tr>
                         </thead>
