@@ -27,5 +27,12 @@ Route::middleware(['web'])->group(function () {
         Route::post('login', 'Admin\\AuthController@auth')->name('admin.login');
 
         Route::get('logout', 'Admin\\AuthController@logout')->name('admin.logout');
+
+        Route::get('users', 'Admin\\UsuarioController@index')->name('usuario');
+
+        Route::get('freelancers', 'Admin\\FreelancerController@index')->name('freelancer');
     });
 });
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
