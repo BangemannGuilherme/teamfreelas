@@ -3,10 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Proposta;
 use Illuminate\Http\Request;
 
 class PropostaController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +25,8 @@ class PropostaController extends Controller
      */
     public function index()
     {
-        //
+        $propostas = Proposta::all();
+        return view('admin.proposta.index', compact('propostas'));
     }
 
     /**

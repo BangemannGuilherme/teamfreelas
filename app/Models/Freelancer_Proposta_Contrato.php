@@ -29,9 +29,4 @@ class Freelancer_Proposta_Contrato extends Model
         'descricao', 
         'trofeu'
     ];
-
-
-
 }
-
-

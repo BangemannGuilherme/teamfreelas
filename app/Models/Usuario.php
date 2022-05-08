@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuario extends Model
 { 
+    use HasFactory;
+
     /**
      * The database table used by the model.
      *

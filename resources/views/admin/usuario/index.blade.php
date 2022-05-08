@@ -1,17 +1,17 @@
 @extends('admin.master')
 
 @section('content')
-<div class="content">
-    <div class="row">
+{{-- <div class="content"> --}}
+    {{-- <div class="row">
         <div class="col-md-12">
             <div class="pull-left">
                 <h2 class="no-margins">Usuários</h2>
             </div>
-            {{-- <div class="pull-right">
-                <button class="btn btn-success" id="btNovoItem" onclick="adicionarUsuario()"><i class="fa fa-plus" aria-hidden="true" data-original-title="" title="" tooltip-init="true"></i> Novo Usuário</button>
-            </div> --}}
+            <div class="pull-right">
+                <button class="btn btn-success" id="btNovoItem" onclick=""><i class="fa fa-plus" aria-hidden="true" data-original-title="" title="" tooltip-init="true"></i> Novo Usuário</button>
+            </div>
         </div>
-    </div>
+    </div> --}}
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive no-padding">
@@ -29,18 +29,18 @@
                             <button type="submit" class="btn btn-default btn-lg btn-margin" value="Search" onClick="limpaBusca()">Limpar</button>
                         </div>
                     </form> --}}
-                    <table id="user_table" class="table hover table-bordered table-datatable" role="grid">
-                        <thead>
+                    <table id="user_table" class="table table-hover table-bordered table-datatable table-striped" role="grid">
+                        <thead class="thead-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Usuário</th>
                                 <th>Nome</th>
                                 <th>Admin</th>
-                                {{-- <th>Data de Criação</th> --}}
+                                <th>Data de Criação</th>
                                 <th>Ativo</th>
                             </tr>
                         </thead>
-                        <tbody><?dump($usuarios)?>
+                        <tbody>
                             @each('admin.usuario.usuario', $usuarios, 'usuario')
                         </tbody>
                     </table>
@@ -72,8 +72,4 @@
             </div>
         </div>
     </form> --}}
-</div>
-
-{{-- @include('CS::Usuario.javascript')
-@include('CS::Usuario.css') --}}
 @endsection
