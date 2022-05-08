@@ -67,6 +67,9 @@
                         <a href="/admin/freelancers"><i class="fa fa-users"></i> <span class="nav-label">Freelancer</span></a>
                     </li>
                     <li>
+                        <a href="/admin/proposta"><i class="fa fa-users"></i> <span class="nav-label">Proposta</span></a>
+                    </li>
+                    <li>
                         <a href="/admin/graphs"><i class="fas fa-chart-area"></i> <span class="nav-label">Gráficos</span></a>
                     </li>
                     <li>

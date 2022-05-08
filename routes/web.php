@@ -31,6 +31,8 @@ Route::middleware(['web'])->group(function () {
         Route::get('users', 'Admin\\UsuarioController@index')->name('usuario');
 
         Route::get('freelancers', 'Admin\\FreelancerController@index')->name('freelancer');
+
+        Route::get('propostas', 'Admin\\PropostaController@index')->name('proposta');
     });
 });
 // Auth::routes();

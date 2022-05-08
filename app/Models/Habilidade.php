@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Habilidade extends Model
 {
-     /**
+    /**
      * The database table used by the model.
      *
      * @var string
@@ -22,7 +22,6 @@ class Habilidade extends Model
      */
     protected $fillable = [
         'id',
-        'nome_habilidade',
-
+        'nome_habilidade'
     ];
 }

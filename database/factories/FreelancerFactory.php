@@ -20,22 +20,12 @@ class FreelancerFactory extends Factory
      */
     public function definition()
     {
-        // return [
-        //     'usuario_id',
-        //     'data_registro',
-        //     'localizao', 
-        //     'descricao', 
-        //     'trofeu'
-
-        //     'username' => $this->faker->username(),
-        //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        //     'nome' => $this->faker->name(),
-        //     'sobrenome' => $this->faker->name(),
-        //     'email' => $this->faker->unique()->safeEmail(),
-        //     'data_nascimento' => date("Y-m-d"),
-        //     'remember_token' => Str::random(10),
-        //     'admin' => false,
-        //     'status' => true
-        // ];
+        return [
+            'usuario_id' =>  $this->faker->unique()->numberBetween(2, \App\Models\User::count()),
+            'data_registro' => $this->faker->date("Y-m-d"),
+            'localizacao' =>  $this->faker->country(), 
+            'descricao' => $this->faker->realText(200, 1), 
+            'trofeu' => $this->faker->word()
+        ];
     }
 }
