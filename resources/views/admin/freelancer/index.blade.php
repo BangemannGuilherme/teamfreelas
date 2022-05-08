@@ -1,5 +1,9 @@
 @extends('admin.master')
 
+@section('breadcrumb', 'Freelancer')
+
+@section('title', 'Freelancer')
+
 @section('content')
 {{-- <div class="content"> --}}
     {{-- <div class="row">

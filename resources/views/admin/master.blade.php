@@ -67,7 +67,7 @@
                         <a href="/admin/freelancers"><i class="fa fa-users"></i> <span class="nav-label">Freelancer</span></a>
                     </li>
                     <li>
-                        <a href="/admin/proposta"><i class="fa fa-users"></i> <span class="nav-label">Proposta</span></a>
+                        <a href="/admin/propostas"><i class="fa fa-users"></i> <span class="nav-label">Proposta</span></a>
                     </li>
                     <li>
                         <a href="/admin/graphs"><i class="fas fa-chart-area"></i> <span class="nav-label">Gráficos</span></a>
@@ -109,13 +109,13 @@
             </div>                
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-sm-4">
-                    <h2>This is main title</h2>
+                    <h2>@yield('title')</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="index.html">This is</a>
+                            <a href="{{ route('admin') }}">Home</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <strong>Breadcrumb</strong>
+                            <strong>@yield('breadcrumb')</strong>
                         </li>
                     </ol>
                 </div>
