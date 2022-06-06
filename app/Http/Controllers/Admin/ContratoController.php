@@ -3,10 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contrato;
 use Illuminate\Http\Request;
 
 class ContratoController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +25,9 @@ class ContratoController extends Controller
      */
     public function index()
     {
-        //
+        $contratos = Contrato::all();
+        return view('admin.contrato.index', compact('contratos'));
     }
-
     /**
      * Show the form for creating a new resource.
      *

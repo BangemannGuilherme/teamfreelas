@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+//VERIFICAR
     /*
     |--------------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration

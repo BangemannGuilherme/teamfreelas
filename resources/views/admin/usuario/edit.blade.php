@@ -1,151 +1,85 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 
-@section('title')
-Usuário - <?php echo $usuario->name ?> | Edição
-@endsection
+@section('breadcrumb', 'Usuário')
+
+@section('title', 'Usuário')
 
 @section('content')
+<h1>Editar Usuario <strong>#{{ $id }}</strong></h1>
+<hr>
 
-<h1>Editar Usuario</h1>
-<hr />
-
-{!! Form::model($usuario, [
-'method' => 'PATCH',
-'url' => ['admin/usuario', $usuario->id],
-'class' => 'form-horizontal'
-]) !!}
-
-<div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
-    {!! Form::label('name', 'Nome: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-6">
-        {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
-        {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
-    </div>
+<div class="col-md-12 text-right">
+    <a class="btn btn-primary" href="{{url('admin/users/') }}"><i class="fas fa-undo-alt"></i> Voltar</a>
 </div>
-
-<div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
-    {!! Form::label('username', 'Usuário: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-6">
-        {!! Form::text('username', null, ['class' => 'form-control', 'required' => 'required']) !!}
-        {!! $errors->first('username', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
-    {!! Form::label('email', 'E-mail: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-6">
-        {!! Form::text('email', null, ['class' => 'form-control', 'required' => 'required']) !!}
-        {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
-    {!! Form::label('password', 'Senha: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-6">
-        {!! Form::password('password', ['class' => 'form-control']) !!}
-        {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('company') ? 'has-error' : ''}}">
-    {!! Form::label('company', 'Empresa: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-6">
-        {!! Form::text('company', null, ['class' => 'form-control']) !!}
-        {!! $errors->first('company', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
-    {!! Form::label('painelprincipal', 'Painel Principal: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-6">
-        {!! Form::select('painelprincipal', \App\Painel::listarPaineis(true), null, ['class' => 'form-control select2']) !!}
-        {!! $errors->first('painelprincipal', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
-    {!! Form::label('debug', 'Modo Debug: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-10">
-        {!! Form::checkbox('debug', 't', $usuario->debug) !!}
-        {!! $errors->first('debug', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
-    {!! Form::label('admin', 'Admin: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-10">
-        {!! Form::checkbox('admin', 't', $usuario->admin) !!}
-        {!! $errors->first('admin', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('ativo') ? 'has-error' : ''}}">
-    {!! Form::label('ativo', 'Ativo: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-10">
-        {!! Form::checkbox('ativo', 't', $usuario->ativo) !!}
-        {!! $errors->first('ativo', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('externo') ? 'has-error' : ''}}">
-    {!! Form::label('externo', 'Usuário externo: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-10">
-        {!! Form::checkbox('externo', 't', $usuario->externo) !!}
-        {!! $errors->first('externo', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('company') ? 'has-error' : ''}}">
-    {!! Form::label('api_token', 'API Token: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-6">
-        <div class="input-group">
-            {!! Form::text('api_token', null, ['class' => 'form-control']) !!}
-            <div class="input-group-btn">
-                <button class="btn btn-info" type="button" title="Gerar HASH" style="padding: 9.5px 10px;" onclick="generateHash('#api_token', 60);return false;"> <i class="fas fa-random"></i> </button>
+<div class="col-md-12">
+    <form class="m-t" role="form" method="POST" action="{{ url('admin/users/edit/' . $id) }}">
+        @csrf
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group {{ $errors->has('username') ? 'has-error' : ''}}">
+                    <label for="username">Usuário</label>
+                    <input type="text" class="form-control" name="username" value="{{ $username }}" placeholder="Username">
+                </div>
             </div>
-            {!! $errors->first('api_token', '<p class="help-block">:message</p>') !!}
+            {{-- <div class="col-sm-6">
+                <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
+                    <label for="password">Senha</label>
+                    <input type="password" class="form-control" name="password" placeholder="Senha">
+                </div>
+            </div> --}}
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" value="{{ $nome }}" placeholder="Nome">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group {{ $errors->has('sobrenome') ? 'has-error' : ''}}">
+                    <label for="sobrenome">Sobrenome</label>
+                    <input type="text" class="form-control" name="sobrenome" value="{{ $sobrenome }}" placeholder="Sobrenome">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" value="{{ $email }}" placeholder="Email">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group {{ $errors->has('data_nascimento') ? 'has-error' : ''}}">
+                    <label for="data_nascimento">Data de Nascimento</label>
+                    <input type="date" class="form-control" name="data_nascimento" value="{{ $data_nascimento }}" placeholder="Data de Nascimento">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group {{ $errors->has('admin') ? 'has-error' : ''}}">
+                    <label for="admin">Admin</label>
+                    <input type="text" class="form-control" name="admin" value="{{ $admin }}" placeholder="Admin" maxlength="4">
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
+                    <label for="status">Status</label>
+                    <input type="text" class="form-control" name="status" value="{{ $status }}" placeholder="Status">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-success block m-b">Salvar</button>
+            </div>
+        </div>
+    </form>
 </div>
-
-<div class="form-group {{ $errors->has('paineis') ? 'has-error' : ''}}">
-    {!! Form::label('grupo_id[]', 'Grupos: ', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-6">
-        {!! Form::select('grupo_id[]', \App\Grupo::all()->pluck('nome', 'id'), \DB::table('usuariosdosgrupos')->where('usuario_id', $usuario->id)->select('grupo_id')->pluck('grupo_id'), ['class' => 'form-control select2', 'multiple']) !!}
-        {!! $errors->first('grupo_id[]', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="col-sm-offset-3 col-sm-2">
-        {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-lg btn-block']) !!}
-    </div>
-</div>
-{!! Form::close() !!}
-
-@if ($errors->any())
-<ul class="alert alert-danger">
-    @foreach ($errors->all() as $error)
-    <li>{{ $error }}</li>
-    @endforeach
-</ul>
-@endif
-
 @endsection
-
-<script type="text/javascript">
-    function generateHash(field, length) {
-
-        if ($(field).length)
-            $(field).val('');
-
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-
-        $(field).val(result);
-    }
-</script>

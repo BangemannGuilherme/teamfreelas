@@ -69,7 +69,8 @@ class FreelancerController extends Controller
      */
     public function edit($id)
     {
-        //
+        //$freelancers = Freelancer::all();
+        return view('admin.freelancer.editfreelancer');
     }
 
     /**

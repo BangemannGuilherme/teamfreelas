@@ -14,9 +14,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>TeamFreelas | Dashboard</title>
+    <title>TeamFreelas | Admin Dashboard</title>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- <link href="/font-awesome/css/font-awesome.css" rel="stylesheet"> --}}
     <script src="https://kit.fontawesome.com/ce2769c38b.js" crossorigin="anonymous"></script>
@@ -32,7 +35,7 @@
 
 </head>
 
-<body>
+<body class="skin-2">
     <div id="wrapper">
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
@@ -41,10 +44,10 @@
                         <div class="dropdown profile-element">
                             {{-- <img alt="image" class="rounded-circle" src="/img/profile_small.jpg"/> --}}
                             <img alt="image" src="/img/teamfreelas.png" style="width: 100%"/>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="/#">
-                                <span class="block m-t-xs font-bold">{{ Auth::user()->nome }} {{ Auth::user()->sobrenome }}</span>
-                                <span class="text-muted text-xs block">{{ Auth::user()->username }}{{--<b class="caret"></b>--}}</span>
-                            </a>
+                            <div>
+                                <span class="block m-t-xs font-bold text-center" style="color: white">{{ Auth::user()->nome }} {{ Auth::user()->sobrenome }}</span>
+                                <span class="text-muted text-xs block text-center" style="color: white">{{ Auth::user()->username }}{{--<b class="caret"></b>--}}</span>
+                            </div>
                             {{-- <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
                                 <li><a class="dropdown-item" href="/contacts.html">Contacts</a></li>
@@ -57,7 +60,7 @@
                             TF+
                         </div>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="/admin"><i class="fas fa-home"></i> <span class="nav-label">Home</span></a>
                     </li>
                     <li>
@@ -67,7 +70,13 @@
                         <a href="/admin/freelancers"><i class="fa fa-users"></i> <span class="nav-label">Freelancer</span></a>
                     </li>
                     <li>
-                        <a href="/admin/propostas"><i class="fa fa-users"></i> <span class="nav-label">Proposta</span></a>
+                        <a href="/admin/propostas"><i class="fa-solid fa-clipboard-question"></i> <span class="nav-label">Proposta</span></a>
+                    </li>
+                    <li>
+                        <a href="/admin/servicos"><i class="fa-solid fa-briefcase"></i> <span class="nav-label">Serviços</span></a>
+                    </li>
+                    <li>
+                        <a href="/admin/contratos"><i class="fa-solid fa-file-signature"></i> <span class="nav-label">Contratos</span></a>
                     </li>
                     <li>
                         <a href="/admin/graphs"><i class="fas fa-chart-area"></i> <span class="nav-label">Gráficos</span></a>
@@ -83,7 +92,7 @@
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="/#"><i class="fa fa-bars"></i> </a>
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-success " href="/#"><i class="fa fa-bars"></i> </a>
                         <form role="search" class="navbar-form-custom" action="search_results.html">
                             <div class="form-group">
                                 <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
@@ -123,10 +132,10 @@
 
             <div class="wrapper wrapper-content">
                 <div class="animated fadeInRightBig">
-                    <h3 class="font-bold">This is page content</h3>
+                    {{-- <h3 class="font-bold">This is page content</h3> --}}
                     <div class="error-desc">
                         @yield('content')
-                        {{-- <br/><a href="index.html" class="btn btn-primary m-t">Dashboard</a> --}}
+                        {{-- <br/><a href="index.html" class="btn btn-success m-t">Dashboard</a> --}}
                     </div>
                 </div>
             </div>
@@ -188,6 +197,112 @@
     <!-- Toastr -->
     <script src="/js/plugins/toastr/toastr.min.js"></script>
 
+    <script>
+        $(document).ready(function() {
+
+            let toast = $('.toast');
+
+            setTimeout(function() {
+                toast.toast({
+                    delay: 5000,
+                    animation: true
+                });
+                toast.toast('show');
+
+            }, 2200);
+
+            var data1 = [
+                [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,30],[11,10],[12,13],[13,4],[14,3],[15,3],[16,6]
+            ];
+            var data2 = [
+                [0,1],[1,0],[2,2],[3,0],[4,1],[5,3],[6,1],[7,5],[8,2],[9,3],[10,2],[11,1],[12,0],[13,2],[14,8],[15,0],[16,0]
+            ];
+            $("#flot-dashboard-chart").length && $.plot($("#flot-dashboard-chart"), [
+                data1, data2
+            ],
+                    {
+                        series: {
+                            lines: {
+                                show: false,
+                                fill: true
+                            },
+                            splines: {
+                                show: true,
+                                tension: 0.4,
+                                lineWidth: 1,
+                                fill: 0.4
+                            },
+                            points: {
+                                radius: 0,
+                                show: true
+                            },
+                            shadowSize: 2
+                        },
+                        grid: {
+                            hoverable: true,
+                            clickable: true,
+                            tickColor: "#d5d5d5",
+                            borderWidth: 1,
+                            color: '#d5d5d5'
+                        },
+                        colors: ["#1ab394", "#1C84C6"],
+                        xaxis:{
+                        },
+                        yaxis: {
+                            ticks: 4
+                        },
+                        tooltip: false
+                    }
+            );
+
+            var doughnutData = {
+                labels: ["App","Software","Laptop" ],
+                datasets: [{
+                    data: [300,50,100],
+                    backgroundColor: ["#a3e1d4","#dedede","#9CC3DA"]
+                }]
+            } ;
+
+
+            var doughnutOptions = {
+                responsive: false,
+                legend: {
+                    display: false
+                }
+            };
+
+
+            var ctx4 = document.getElementById("doughnutChart").getContext("2d");
+            new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
+
+            var doughnutData = {
+                labels: ["App","Software","Laptop" ],
+                datasets: [{
+                    data: [70,27,85],
+                    backgroundColor: ["#a3e1d4","#dedede","#9CC3DA"]
+                }]
+            } ;
+
+
+            var doughnutOptions = {
+                responsive: false,
+                legend: {
+                    display: false
+                }
+            };
+
+
+            var ctx4 = document.getElementById("doughnutChart2").getContext("2d");
+            new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
+
+        });
+
+        $(window).bind("scroll", function () {
+            let toast = $('.toast');
+            toast.css("top", window.pageYOffset + 20);
+
+        });
+    </script>
 
 </body>
 </html>

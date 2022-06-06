@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,14 +13,15 @@ class AuthController extends Controller
 {
     public function index()
     {
-        if (Auth::check())
-        {
-            return redirect()->intended('admin');
-        }
-        else
-        {
-            return view('admin.auth.login');
-        }
+        return view('auth.register');
+        // if (Auth::check())
+        // {
+        //     return redirect()->intended();
+        // }
+        // else
+        // {
+        //     return view('admin/login');
+        // }
     }
 
     public function auth(Request $request)

@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('admin.layouts.master')
 
 @section('breadcrumb', 'Usuário')
 
@@ -17,6 +17,7 @@
         </div>
     </div> --}}
     <div class="row">
+        <div class="col-md-12 text-right"><a class="btn btn-primary" href="{{ url('admin/users/create/') }}"><i class="fas fa-plus"></i> Cadastrar Usuário</a></div>
         <div class="col-md-12">
             <div class="table-responsive no-padding">
                 <div class="dataTables_wrapper no-footer">
@@ -42,11 +43,13 @@
                                 <th>Admin</th>
                                 <th>Data de Criação</th>
                                 <th>Ativo</th>
+                                <th>Opções</th>
                             </tr>
                         </thead>
                         <tbody>
                             @each('admin.usuario.usuario', $usuarios, 'usuario')
                         </tbody>
+                        
                     </table>
                     {{-- @if ($usuarios->lastPage() > 1)
                     <ul class="pagination pull-right">

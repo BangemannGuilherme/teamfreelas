@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -26,7 +27,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::all();
+        $usuarios = Usuario::orderBy('id')->get();
         return view('admin.usuario.index', compact('usuarios'));
     }
 
@@ -37,7 +38,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.usuario.create');
     }
 
     /**
@@ -48,7 +49,12 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuario = $request->all();
+        $usuario['password'] = Hash::make($usuario['password']);
+
+        Usuario::create($request->all());
+
+        return view('admin.usuario.index');
     }
 
     /**
@@ -70,7 +76,23 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        // $usuario = Usuario::findOrFail($id);
+
+        // return view('admin.usuario.edit', compact('usuario'));
+
+        $usuario = Usuario::where('id', $id)->first();
+
+        return view('admin.usuario.edit', [
+            'id' =>  $usuario->id,
+            'username' =>  $usuario->username,
+            'password' =>  $usuario->password,
+            'nome' => $usuario->nome,
+            'sobrenome' => $usuario->sobrenome,
+            'email' => $usuario->email,
+            'data_nascimento' => $usuario->data_nascimento,
+            'admin' => $usuario->admin,
+            'status' => $usuario->status
+        ]);
     }
 
     /**
@@ -82,7 +104,16 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $usuario = Usuario::find($id);
+        $usuario->nome = $data['nome'];
+        $usuario->sobrenome = $data['sobrenome'];
+        $usuario->email = $data['email'];
+
+        $usuario->save();
+
+        return view('admin.usuario.index');
     }
 
     /**
@@ -93,64 +124,22 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Usuario::destroy($id);
+
+        return view('admin.usuario.index');
     }
+
+    /**
+     * Enable/Disable the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function status($id)
+    {
+        $usuario = Usuario::find($id);
+
+        return view('admin.usuario.index');
+    }
+
 }
-
-
-
-
-// namespace App\CS\Controllers;
-
-// use App\Configuracao;
-// use App\CS\Models\Redmine\User;
-// use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Route;
-
-// class UsuarioController extends Controller
-// {
-//     /**
-//      * Display a listing of the resource.
-//      *
-//      * @return \Illuminate\View\View
-//      */
-//     public function index(Request $request)
-//     {
-//         $search = trim($request->input('busca'));
-
-//         $search = str_replace(' ', '%', $search);
-
-//         if( $search !== '' ){
-//             $usuarios = User::where('login', '<>', '')
-//                 ->where('login', '<>', Configuracao::get('REDMINE_USUARIO_LOGIN'))
-//                 ->where('type', '=', 'User')
-//                 ->where(function ($query) use ($search) {
-//                     $query->where('login', 'ilike', '%'.$search.'%')
-//                         ->orWhere(DB::raw("firstname || ' ' || lastname"), 'ilike', '%'.$search.'%');
-
-//                         if ( is_numeric($search) )
-//                         {
-//                             $query->orWhere('id', '=', $search);
-//                         }
-//             })
-//             ->orderBy('id', 'ASC')->paginate(10);
-//             $usuarios->appends(['busca' => $search]);
-//         }
-//         else
-//         {
-//             $usuarios = User::where('login', '<>', '')
-//                 ->where('login', '<>', Configuracao::get('REDMINE_USUARIO_LOGIN'))
-//                 ->where('type', '=', 'User')
-//                 ->orderBy('id', 'ASC')->paginate(10);
-//         }
-
-//         $usuarios->setPath('usuarios');
-
-//         view()->addNamespace('CS', app_path('CS/Blades'));
-
-//         return View('CS::Usuario.index')->with('usuarios', $usuarios);
-//     }
-// }
