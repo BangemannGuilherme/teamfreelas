@@ -1,4 +1,8 @@
-@extends('admin.master')
+@extends('admin.layouts.master')
+
+@section('breadcrumb', 'Proposta')
+
+@section('title', 'Proposta')
 
 @section('content')
 {{-- <div class="content"> --}}

@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('layout/index');
-// });
-
-
 // Admin Routes
 Route::middleware(['web'])->group(function () {
     Route::prefix('admin')->group(function (){
@@ -29,12 +24,36 @@ Route::middleware(['web'])->group(function () {
         Route::get('logout', 'Admin\\AuthController@logout')->name('admin.logout');
 
         Route::get('users', 'Admin\\UsuarioController@index')->name('usuario');
+        Route::get('users/create', 'Admin\\UsuarioController@create')->name('usuario.create');
+        Route::post('users/create', 'Admin\\UsuarioController@store')->name('usuario.store');
+        Route::get('users/edit/{id}', 'Admin\\UsuarioController@edit')->name('usuario.edit');
+        Route::post('users/edit/{id}', 'Admin\\UsuarioController@update')->name('usuario.update');
+        Route::get('users/destroy/{id}', 'Admin\\UsuarioController@destroy')->name('usuario.destroy');
 
         Route::get('freelancers', 'Admin\\FreelancerController@index')->name('freelancer');
 
         Route::get('propostas', 'Admin\\PropostaController@index')->name('proposta');
+
+        Route::get('servicos', 'Admin\\ServicoController@index')->name('servico');
+
+        Route::get('contratos', 'Admin\\ContratoController@index')->name('contrato');
     });
 });
-// Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Page Routes
+Route::middleware(['web'])->group(function () {
+    Route::get('/', 'HomeController@index')->name('home');
+
+    Route::get('login', 'AuthController@index')->name('login.index');
+    Route::post('login', 'AuthController@auth')->name('login');
+
+    Route::get('registro', 'AuthController@indexRegistro')->name('registro.index');
+    Route::post('registro', 'AuthController@registro')->name('registro');
+
+    Route::get('logout', 'AuthController@logout')->name('logout');
+});
+
+// Page Routes Auth
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::get('perfil', 'PrincipalController@perfilUsuario')->name('usuario.perfil');
+});

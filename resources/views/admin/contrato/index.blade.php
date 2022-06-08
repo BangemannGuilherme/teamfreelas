@@ -1,15 +1,15 @@
 @extends('admin.layouts.master')
 
-@section('breadcrumb', 'Freelancer')
+@section('breadcrumb', 'Contrato')
 
-@section('title', 'Freelancer')
+@section('title', 'Contrato')
 
 @section('content')
 {{-- <div class="content"> --}}
     {{-- <div class="row">
         <div class="col-md-12">
             <div class="pull-left">
-                <h2 class="no-margins">Usuários</h2>
+                <h2 class="no-margins">Proposta</h2>
             </div>
             <div class="pull-right">
                 <button class="btn btn-success" id="btNovoItem" onclick=""><i class="fa fa-plus" aria-hidden="true" data-original-title="" title="" tooltip-init="true"></i> Novo Usuário</button>
@@ -33,21 +33,18 @@
                             <button type="submit" class="btn btn-default btn-lg btn-margin" value="Search" onClick="limpaBusca()">Limpar</button>
                         </div>
                     </form> --}}
-                    <table id="freelancer_table" class="table table-hover table-bordered table-datatable table-striped" role="grid">
+                    <table id="user_table" class="table table-hover table-bordered table-datatable table-striped" role="grid">
                         <thead class="thead-dark">
                             <tr>
                                 <th>ID</th>
-                                <th>Usuário ID</th>
-                                <th>Data de Registro</th>
-                                <th>Localização</th>
-                                <th>Descrição</th>
-                                <th>Troféu</th>
-                                <th>Data de Criação</th>
-                                <th>Opções</th>
+                                <th>Data inicio</th>
+                                <th>Data fim</th>
+                                <th>Valor Pagamento</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @each('admin.freelancer.freelancer', $freelancers, 'freelancer')
+                            @each('admin.contrato.contrato', $contratos, 'contrato')
                         </tbody>
                     </table>
                     {{-- @if ($usuarios->lastPage() > 1)

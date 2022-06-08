@@ -25,10 +25,6 @@ class User extends Authenticatable
         'sobrenome',
         'email',
         'data_nascimento',
-        'created_at', 
-        'updated_at', 
-        'deleted_at', 
-        'remember_token', 
         'admin', 
         'status'
     ];

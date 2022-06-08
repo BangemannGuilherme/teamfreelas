@@ -3,10 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Servico;
 use Illuminate\Http\Request;
 
 class ServicoController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +25,9 @@ class ServicoController extends Controller
      */
     public function index()
     {
-        //
+        $servicos = Servico::all();
+        return view('admin.servico.index', compact('servicos'));
     }
-
     /**
      * Show the form for creating a new resource.
      *

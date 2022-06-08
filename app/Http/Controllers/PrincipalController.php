@@ -1,21 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Freelancer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class FreelancerController extends Controller
+class PrincipalController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function perfilUsuario()
     {
-        $this->middleware('auth');
+        return view('usuario.perfil');
     }
 
     /**
@@ -25,8 +19,7 @@ class FreelancerController extends Controller
      */
     public function index()
     {
-        $freelancers = Freelancer::all();
-        return view('admin.freelancer.index', compact('freelancers'));
+        //
     }
 
     /**
@@ -69,8 +62,7 @@ class FreelancerController extends Controller
      */
     public function edit($id)
     {
-        //$freelancers = Freelancer::all();
-        return view('admin.freelancer.editfreelancer');
+        //
     }
 
     /**
