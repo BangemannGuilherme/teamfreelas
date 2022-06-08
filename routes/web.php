@@ -44,11 +44,16 @@ Route::middleware(['web'])->group(function () {
 Route::middleware(['web'])->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
 
-    Route::get('registro', 'AuthController@index')->name('registro.index');
-    Route::post('registro', 'AuthController@registro')->name('registro');
-
     Route::get('login', 'AuthController@index')->name('login.index');
     Route::post('login', 'AuthController@auth')->name('login');
 
+    Route::get('registro', 'AuthController@indexRegistro')->name('registro.index');
+    Route::post('registro', 'AuthController@registro')->name('registro');
+
     Route::get('logout', 'AuthController@logout')->name('logout');
+});
+
+// Page Routes Auth
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::get('perfil', 'PrincipalController@perfilUsuario')->name('usuario.perfil');
 });

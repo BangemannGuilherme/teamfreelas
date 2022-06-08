@@ -26,7 +26,7 @@
     <a class="btn btn-primary" href="{{url('admin/users/') }}"><i class="fas fa-undo-alt"></i> Voltar</a>
 </div>
 <div class="col-md-12">
-    <form class="m-t" role="form" method="POST" action="{{ url('admin/users/create/') }}">
+    <form class="m-t" role="form" method="POST" action="{{ url('admin/users/create') }}">
         @csrf
         <div class="row">
             <div class="col-sm-6">
