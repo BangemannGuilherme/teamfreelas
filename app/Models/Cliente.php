@@ -27,9 +27,6 @@ class Cliente extends Model
         'usuario_id',
         'data_registro',
         'localizacao',
-        'empresa_id',
-        'created_at', 
-        'updated_at', 
-        'deleted_at'
+        'empresa_id'
     ];
 }

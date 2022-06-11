@@ -36,7 +36,7 @@ class AuthController extends Controller
         ]);
 
         if ( $validator->fails() ) {
-            return back()->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput($request->all());
         }
 
         $credentials = $validator->validated();
@@ -46,7 +46,7 @@ class AuthController extends Controller
             {
                 $request->session()->regenerate();
 
-                return redirect()->intended('/');
+                return redirect('/');
             }
 
             return back()->withErrors([
@@ -103,7 +103,7 @@ class AuthController extends Controller
         ]);
 
         if ( $validator->fails() ) {
-            return back()->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput($request->all());
         }
 
         $this->registrarNovoUsuario(

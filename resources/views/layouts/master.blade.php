@@ -18,6 +18,18 @@
     {{-- <link href="/font-awesome/css/font-awesome.css" rel="stylesheet"> --}}
     <script src="https://kit.fontawesome.com/ce2769c38b.js" crossorigin="anonymous"></script>
 
+    <!-- Mainly scripts -->
+    <script src="/js/jquery-3.1.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="/js/inspinia.js"></script>
+    <script src="/js/plugins/pace/pace.min.js"></script>
+    <script src="/js/plugins/wow/wow.min.js"></script>
+
     <!-- Toastr style -->
     <link href="/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
@@ -32,7 +44,7 @@
     <div class="navbar-wrapper">
         <nav class="navbar navbar-default navbar-fixed-top navbar-expand-md" role="navigation">
             <div class="container">
-                <a class="navbar-brand" href="{{route('home')}}">Página Inicial</a>
+                <a class="navbar-brand" href="{{ route('home') }}">Página Inicial</a>
                 <div class="navbar-header page-scroll">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
                         <i class="fa fa-bars"></i>
@@ -45,18 +57,18 @@
                         <li><a class="nav-link page-scroll" href="#pricing">Encontre Trabalho</a></li>
                         <li><a class="nav-link page-scroll" href="#contact">Contato</a></li>
                         <li>&emsp;&emsp;&emsp;</li>
-                        @if (Auth::check())
-                        <li class="text-right"><a class="nav-link page-scroll" href="{{ route('usuario.perfil') }}">{{ Auth::user()->nome }}</a></li>
-                        @else
-                        <li class="text-right"><a class="nav-link page-scroll" href="{{ route('registro') }}">Cadastre-se</a></li>
-                        @endif
-                        @if (Auth::check())
-                        <li class="text-right"><a class="nav-link page-scroll" href="{{ route('logout') }}">Logout</a></li>
-                        @else
-                        <li class="text-right"><a class="nav-link page-scroll" href="{{ route('login') }}">Login</a></li>
-                        @endif
                     </ul>
                 </div>
+                @if (Auth::check())
+                <a class="navbar-brand" href="{{ route('usuario.perfil', ['username' => Auth::user()->username]) }}">{{ Auth::user()->nome }}</a>
+                @else
+                <a class="navbar-brand" href="{{ route('registro') }}">Cadastre-se</a>
+                @endif
+                @if (Auth::check())
+                <a class="navbar-brand" href="{{ route('logout') }}">Logout</a>
+                @else
+                <a class="navbar-brand" href="{{ route('login') }}">Login</a>
+                @endif
             </div>
         </nav>
     </div>
@@ -89,7 +101,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <a href="mailto:test@email.com" class="btn btn-success">Nos mande um email</a>
+                    <a href="mailto:test@email.com" class="btn btn-success">Mandar Email</a>
                     <p class="m-t-sm">
                         Siga-nos nas redes sociais
                     </p>
@@ -110,19 +122,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Mainly scripts -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-    <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
-    <script src="js/plugins/wow/wow.min.js"></script>
-
 
     <script>
 
@@ -153,7 +152,7 @@
                 window.addEventListener( 'scroll', function( event ) {
                     if( !didScroll ) {
                         didScroll = true;
-                        setTimeout( scrollPage, 250 );
+                        setTimeout( scrollPage, 150 );
                     }
                 }, false );
             }

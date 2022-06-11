@@ -23,9 +23,6 @@ class Empresa extends Model
     protected $fillable = [
         'id',
         'nome',
-        'localizacao',
-        'created_at', 
-        'updated_at', 
-        'deleted_at'
+        'localizacao'
     ];
 }
