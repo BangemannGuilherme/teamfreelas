@@ -26,9 +26,6 @@ class Contrato extends Model
         'freelancer_id',
         'data_inicio',
         'data_fim',
-        'tipo_pagamento_id',
-        'created_at', 
-        'updated_at', 
-        'deleted_at'
+        'tipo_pagamento_id'
     ];
 }

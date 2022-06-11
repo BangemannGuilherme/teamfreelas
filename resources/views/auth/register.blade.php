@@ -26,10 +26,9 @@
 
             </div>
             <div class="middle-box text-center loginscreen">
-                <h3>Bem vindo a pagina de registro</h3>
+                <h3>Bem vindo à pagina de registro</h3>
                 <p><b>TeamFreelas</b></p>
-                <p>Crie sua conta e seja feliz!.</p>
-                
+
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -43,24 +42,31 @@
                 <form class="m-t" role="form" method="POST" action="{{ route('registro') }}">
                     @csrf
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nome" name="name" required="">
+                        <label for="name">Nome:</label>
+                        <input type="text" class="form-control" placeholder="Nome" name="name" value="{{ old('name') }}" required="">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Sobrenome" name="surname" required="">
+                        <label for="surname">Sobrenome:</label>
+                        <input type="text" class="form-control" placeholder="Sobrenome" name="surname" value="{{ old('surname') }}" required="">
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email" name="email" required="">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}" required="">
                     </div>
                     <div class="form-group">
-                        <input type="date" class="form-control" placeholder="Data de Nascimento" name="data_nascimento" required="">
+                        <label for="data_nascimento">Data de Nascimento:</label>
+                        <input type="date" class="form-control" placeholder="Data de Nascimento" name="data_nascimento" value="{{ old('data_nascimento') }}" required="">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Usuário" name="username" required="">
+                        <label for="username">Usuário:</label>
+                        <input type="text" class="form-control" placeholder="Usuário" name="username" value="{{ old('username') }}" required="">
                     </div>
                     <div class="form-group">
+                        <label for="password">Senha:</label>
                         <input type="password" class="form-control" placeholder="Senha" name="password" required="">
                     </div>
                     <div class="form-group">
+                        <label for="password_confirmation">Confirmar senha:</label>
                         <input type="password" class="form-control" placeholder="Confirmar senha" name="password_confirmation" required="">
                     </div>
                     <button type="submit" class="btn btn-success block full-width m-b">Registro</button>
@@ -87,6 +93,13 @@
             });
         });
     </script>
+    <style>
+        label {
+            float: left;
+            font-size: 105%;
+            font-weight: bold;
+        }
+    </style>
 </body>
 
 </html>

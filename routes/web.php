@@ -54,6 +54,7 @@ Route::middleware(['web'])->group(function () {
 });
 
 // Page Routes Auth
-Route::middleware(['web', 'auth'])->group(function () {
-    Route::get('perfil', 'PrincipalController@perfilUsuario')->name('usuario.perfil');
+Route::middleware(['auth'])->group(function () {
+    Route::get('perfil/{username}', 'PrincipalController@perfilUsuario')->name('usuario.perfil');
+    Route::post('perfil/{id}', 'PrincipalController@perfilUsuarioAtualizar')->name('usuario.perfil.update');
 });

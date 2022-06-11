@@ -29,7 +29,18 @@
             </div>
             <div class="col-md-6">
                 <div class="ibox-content">
-                    <form class="m-t" role="form" method="POST" action="{{ route('logar') }}">
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Usuário" name="username" required="">
@@ -44,7 +55,7 @@
                         </a> -->
 
                         <p class="text-muted text-center">
-                            <small>Você ja tem registro?</small>
+                            <small>Você já possui uma conta?</small>
                         </p>
                         <a class="btn btn-sm btn-success btn-block btn-outline" href="{{ route('registro') }}">Criar uma conta</a>
                         <a class="btn btn-sm btn-success btn-block btn-outline" href="{{ route('home') }}">Página incial</a>

@@ -9,10 +9,10 @@
     <div class="carousel-inner" role="listbox">
         <div class="carousel-item active">
             <div class="container">
-                <div class="carousel-caption">
+                <div class="carousel-caption" /*style="color: #1c84c6*/">
                     <h1>Venha trabalhar conosco<br/>
-                        na mais nova,<br/>
-                        Plataforma de Freelancer<br/>
+                        na mais nova<br/>
+                        plataforma de Freelancer<br/>
                         do Brasil</h1>
                     <p>Faça seu cadastro gratuitamente!</p>
                     <p>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="carousel-image wow zoomIn">
                     <!-- <img src="img/landing/laptop.png" alt="laptop"/> -->
-                    <img src="img/teamfreelas.png" width= 600px alt="teamfreelas"/>
+                    <img src="img/teamfreelas.png" width="150%" alt="teamfreelas"/>
                 </div>
             </div>
             <!-- Set background for slide in css -->
@@ -216,7 +216,7 @@
                 <h2>Desenvolvedores capacitados </h2>
                 <p>A TeamFreelas contem colaboradores de varias linguagens, sendo Web, Desktop e Aplicativos.
                     Profissionais treinados para trazer a sofisticação e aperfeiçoamento para seus projetos, sejam eles pessoais ou empresariais.</p>
-                <a href="" class="btn btn-success">Saiba mais</a>
+                <a href="#" class="btn btn-success">Saiba mais</a>
             </div>
             <div class="col-lg-6 text-right m-t-n-lg wow zoomIn">
                 <img src="img/landing/iphone.jpg" class="img-fluid" alt="dashboard">
@@ -226,7 +226,7 @@
                 <h2>Designers criativos </h2>
                 <p>Contamos com os melhores designers de sites, aplicações, videos e fotos.
                      Sempre zelando o objetivo do cliente e respeitando os prazos de entrega.</p>
-                <a href="" class="btn btn-success">Saiba mais</a>
+                <a href="#" class="btn btn-success">Saiba mais</a>
             </div>
         </div>
     </div>
@@ -256,8 +256,8 @@
                             <p>Assim que realizar seu cadastro, o cliente já esta apto para a postagem do serviço que deseja realizar, especificando as informações
                                 do projeto.
                             </p>
-                            <a href="#" class="btn btn-xs btn-success"> More info</a>
-                            <span class="vertical-date"> Hoje <br/> <small>24 de Dezembro</small> </span>
+                            <a href="#" class="btn btn-xs btn-success"> Mais informações</a>
+                            <span class="vertical-date"> Hoje <br/> <!--<small>24 de Dezembro</small>--> </span>
                         </div>
                     </div>
 
@@ -270,8 +270,8 @@
                             <h2>Decisão</h2>
                             <p>Os Freelancers irão analisar o projeto, quem decidir realiza-lo, enviara a proposta, e então
                                 um contrato de acordo é enviado ao cliente.</p>
-                            <a href="#" class="btn btn-xs btn-success"> More info</a>
-                            <span class="vertical-date"> Amanhã <br/> <small>26 de Dezembro</small> </span>
+                            <a href="#" class="btn btn-xs btn-success"> Mais informações</a>
+                            <span class="vertical-date"> Amanhã <br/> <!--<small>26 de Dezembro</small>--> </span>
                         </div>
                     </div>
 
@@ -283,8 +283,8 @@
                         <div class="vertical-timeline-content">
                             <h2>Implementação</h2>
                             <p>Assim que o acordo é fechado e o contrato assinado, o Freelancer irá entregar o projeto de acordo com as datas previstas. </p>
-                            <a href="#" class="btn btn-xs btn-success"> More info</a>
-                            <span class="vertical-date"> Segunda <br/> <small>02 de Janeiro</small> </span>
+                            <a href="#" class="btn btn-xs btn-success"> Mais informações</a>
+                            <span class="vertical-date"> Em até uma semana <br/> <!--<small>02 de Janeiro</small>--> </span>
                         </div>
                     </div>
 
