@@ -23,6 +23,7 @@ class Servico extends Model
     protected $fillable = [
         'id',
         'cliente_id',
+        'titulo',
         'descricao',
         'habilidade_principal_id', 
         'tipo_pagamento_id', 

@@ -52,9 +52,9 @@
                 </div>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a class="nav-link page-scroll" href="#team">Publicar Projeto</a></li>
-                        <li><a class="nav-link page-scroll" href="#testimonials">Encontre Freelancers</a></li>
-                        <li><a class="nav-link page-scroll" href="#pricing">Encontre Trabalho</a></li>
+                        <li><a class="nav-link page-scroll" href="{{ route('projetos.show') }}">Publicar Projeto</a></li>
+                        <li><a class="nav-link page-scroll" href="{{ route('freelancers.show') }}">Encontre Freelancers</a></li>
+                        <li><a class="nav-link page-scroll" href="{{ route('servicos.show') }}" >Encontre Trabalho</a></li>
                         <li><a class="nav-link page-scroll" href="#contact">Contato</a></li>
                         <li>&emsp;&emsp;&emsp;</li>
                     </ul>

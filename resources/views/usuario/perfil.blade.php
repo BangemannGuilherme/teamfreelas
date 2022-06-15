@@ -34,6 +34,41 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-12 widgets-perfil">
+        <h1>PERFIL FREELANCER</h1>
+        <div class="widgets-group">
+            <div class="col-md-12 widgets-subtitle"><h2 style="font-weight: bold;">Informações:</h2></div>
+            <div class="col-md-6">
+                <div class="widget ibox-content">
+                    <h2><label>Descrição:</label>
+                        <p>{{ $usuario->descricao }}</p>
+                    </h2>
+                    <ul class="list-unstyled m-t-md">
+                        <li>
+                            <span class="fa fa-envelope m-r-xs"></span>
+                            <label>Troféu:</label>
+                            {{ $usuario->trofeu }}
+                        </li>
+                        <li>
+                            <span class="fa fa-home m-r-xs"></span>
+                            <label>Data de Registro:</label>
+                            {{ $usuario->data_registro }}
+                        </li>
+                        <li>
+                            <span class="fa fa-phone m-r-xs"></span>
+                            <label>Habilidade:</label>
+                            {{ $usuario->nome_habilidade }}
+                        </li>
+                    </ul>
+                    @include('usuario.edit')
+                    {{-- <a class="btn btn-success btn-outline" href="{{ route('usuario.perfil.editar', ['username' => Auth::user()->username]) }}">Editar informações</a> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 @endsection
 

@@ -51,6 +51,12 @@ Route::middleware(['web'])->group(function () {
     Route::post('registro', 'AuthController@registro')->name('registro');
 
     Route::get('logout', 'AuthController@logout')->name('logout');
+
+    Route::get('freelancers', 'PrincipalController@freelancerShow')->name('freelancers.show');
+
+    Route::get('servicos', 'PrincipalController@servicoShow')->name('servicos.show');
+
+    Route::get('projetos', 'PrincipalController@projetoShow')->name('projetos.show');
 });
 
 // Page Routes Auth

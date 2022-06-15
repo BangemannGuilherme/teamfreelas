@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Contato;
 use App\Models\Endereco;
+use App\Models\Freelancer;
+use App\Models\Servico;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,11 +18,14 @@ class PrincipalController extends Controller
     {
         if ( Auth::check() && Auth::user()->username == $username )
         {
-            $usuario = User::select('users.*', 'endereco.*', 'contato.*')
-                            ->join('endereco', 'users.id', '=', 'endereco.usuario_id')
-                            ->join('contato', 'users.id', '=', 'contato.usuario_id')
+            $usuario = User::select('users.*', 'endereco.*', 'contato.*', 'freelancer.*', 'habilidade.*')
+                            ->leftJoin('endereco', 'users.id', '=', 'endereco.usuario_id')
+                            ->leftJoin('contato', 'users.id', '=', 'contato.usuario_id')
+                            ->leftJoin('freelancer', 'users.id', '=', 'freelancer.usuario_id')
+                            ->leftJoin('tem_habilidade', 'tem_habilidade.freelancer_id', '=', 'freelancer.id')
+                            ->leftJoin('habilidade', 'habilidade.id', '=', 'tem_habilidade.habilidade_id')
                             ->where('username', $username)->first();
-        
+
             return view('usuario.perfil', compact('usuario'));
         }
         else
@@ -92,6 +97,50 @@ class PrincipalController extends Controller
                 'error' => 'error'
             ];
         }
+    }
+
+
+    public function freelancerShow()
+    {
+        {
+            $freelancer = Freelancer::select('users.*', 'endereco.*', 'contato.*', 'freelancer.*', 'habilidade.*')
+                            ->leftJoin('endereco', 'users.id', '=', 'endereco.usuario_id')
+                            ->leftJoin('contato', 'users.id', '=', 'contato.usuario_id')
+                            ->leftJoin('freelancer', 'users.id', '=', 'freelancer.usuario_id')
+                            ->leftJoin('tem_habilidade', 'tem_habilidade.freelancer_id', '=', 'freelancer.id')
+                            ->leftJoin('habilidade', 'habilidade.id', '=', 'tem_habilidade.habilidade_id')
+                            ->get();
+
+            return view('freelancer.freelancer', compact('freelancer'));
+        }
+
+
+    }
+
+    public function projetoShow()
+    {
+        if( Auth::check())
+        {
+            return view('projeto.projeto');
+        } else {
+            return view('auth.login');
+        }
+    }
+
+    public function servicoShow()
+    {
+        {
+            $servico = User::select('users.*', 'endereco.*', 'contato.*', 'freelancer.*', 'habilidade.*')
+                            ->leftJoin('endereco', 'users.id', '=', 'endereco.usuario_id')
+                            ->leftJoin('contato', 'users.id', '=', 'contato.usuario_id')
+                            ->leftJoin('freelancer', 'users.id', '=', 'freelancer.usuario_id')
+                            ->leftJoin('tem_habilidade', 'tem_habilidade.freelancer_id', '=', 'freelancer.id')
+                            ->leftJoin('habilidade', 'habilidade.id', '=', 'tem_habilidade.habilidade_id')
+                            ->get();
+
+            return view('servico.servico', compact('servico'));
+        }
+
     }
 
     /**
