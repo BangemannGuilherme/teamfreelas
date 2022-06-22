@@ -26,7 +26,6 @@ class Servico extends Model
         'titulo',
         'descricao',
         'habilidade_principal_id', 
-        'tipo_pagamento_id', 
         'valor_pagamento',
         'complexidade',
         'data_estimada'

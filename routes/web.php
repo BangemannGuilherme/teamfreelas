@@ -57,6 +57,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('servicos', 'PrincipalController@servicoShow')->name('servicos.show');
 
     Route::get('projetos', 'PrincipalController@projetoShow')->name('projetos.show');
+    Route::post('projetos', 'PrincipalController@servicoCreate')->name('servico.create');
 });
 
 // Page Routes Auth

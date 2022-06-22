@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Contato;
 use App\Models\Endereco;
 use App\Models\Freelancer;
@@ -121,7 +122,8 @@ class PrincipalController extends Controller
     {
         if( Auth::check())
         {
-            return view('projeto.projeto');
+            $cliente = Cliente::where("usuario_id", Auth::user()->id)->first();
+            return view('projeto.projeto', compact('cliente'));
         } else {
             return view('auth.login');
         }
@@ -141,6 +143,23 @@ class PrincipalController extends Controller
             return view('servico.servico', compact('servico'));
         }
 
+    }
+
+    
+
+    public function servicoCreate(Request $request){
+        
+        Servico::create([
+            'cliente_id' => $request->input('cliente_id'),
+            'titulo' => $request->input('titulo'),
+            'descricao' => $request->input('descricao'),
+            'habilidade_principal_id' => $request->input('habilidade'),
+            'valor_pagamento' => $request->input('valor_pagamento'),
+            'complexidade' => $request->input('complexidade'),
+            'data_estimada' => $request->input('data_estimada'),
+        ]);
+
+        return view('home');
     }
 
     /**

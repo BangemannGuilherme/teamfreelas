@@ -83,14 +83,6 @@
         font-weight: bold;
     }
 
-    .landing-page .navbar-default .nav li a {
-        color: #676a6c;
-    }
-
-    .landing-page .navbar-scroll.navbar-default .nav li a {
-        color: #676a6c;
-    }
-
     .modal-body {
         padding: 20px 30px 5px 30px !important;
     }

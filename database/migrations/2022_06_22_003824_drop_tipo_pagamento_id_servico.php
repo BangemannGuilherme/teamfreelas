@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTituloServico extends Migration
+class DropTipoPagamentoIdServico extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,10 @@ class AddTituloServico extends Migration
     public function up()
     {
         Schema::table('servico', function (Blueprint $table) {
-            $table->string('titulo');
+            $table->dropColumn('tipo_pagamento_id');
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

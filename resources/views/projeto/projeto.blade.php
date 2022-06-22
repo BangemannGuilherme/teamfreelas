@@ -8,7 +8,7 @@
             <div class="col-md-12 widgets-subtitle"><h3 style="font-weight: bold;">Descreva as Informações do seu projeto:</h3></div>
                 <div class="widget ibox-content">
                     <div class="col-md-12">
-                        <form class="m-t" role="form" method="POST" action="">
+                        <form class="m-t" role="form" method="POST" action="{{ route('servico.create') }}">
                             @csrf
                                 <div class="col-sm-12">
                                     <div class="form-group {{ $errors->has('username') ? 'has-error' : ''}}">
@@ -35,9 +35,9 @@
                                     <div class="form-group {{ $errors->has('sobrenome') ? 'has-error' : ''}}">
                                         <label for="complexidade">Complexidade</label>
                                         <select type="select" class="form-control select2" name="complexidade" placeholder="Complexidade">
-                                        <option> Baixa </option>
-                                        <option> Média</option>
-                                        <option> Alta </option>
+                                            <option> Baixa </option>
+                                            <option> Média</option>
+                                            <option> Alta </option>
                                         </select>
                                     </div>
                                 </div>
@@ -49,6 +49,19 @@
                                         <input type="date" class="form-control" name="data_estimada" placeholder="Data estimada">
                                     </div>
                                 </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
+                                        <label for="habilidade">Habilidade desejada</label>
+                                        <select type="select" class="form-control select2" name="habilidade" placeholder="Habilidade desejada">
+                                            <option value="1"> PHP </option>
+                                            <option value="2"> Laravel </option>
+                                            <option value="3"> JavaScript </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" class="form-control" name="cliente_id" value="{{ $cliente->id }}">
 
                     
                     
@@ -65,3 +78,9 @@
     </div>
 
 @endsection
+
+<script>
+    window.onload = function(){
+        $('.navbar-default').addClass('navbar-scroll');
+    }
+</script>
