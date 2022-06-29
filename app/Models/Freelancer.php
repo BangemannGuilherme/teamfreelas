@@ -24,10 +24,15 @@ class Freelancer extends Model
      */
     protected $fillable = [
         'id',
-        'usuario_id',
+        'user_id',
         'data_registro',
         'localizao', 
         'descricao', 
         'trofeu'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

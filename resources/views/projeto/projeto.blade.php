@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container" style="margin-top: 3%;">
+<div class="container" style="margin-top: 4%;">
     <div class="col-md-12 widgets-perfil">
         <h1 style="font-weight: bold;">Publicar projeto</h1>
         <div class="widgets-group">

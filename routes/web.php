@@ -54,7 +54,8 @@ Route::middleware(['web'])->group(function () {
 
     Route::get('freelancers', 'PrincipalController@freelancerShow')->name('freelancers.show');
 
-    Route::get('servicos', 'PrincipalController@servicoShow')->name('servicos.show');
+    Route::get('projetos/listagem', 'PrincipalController@projetoList')->name('projetos.list');
+    Route::get('freelancers/listagem', 'PrincipalController@freelancerList')->name('freelancers.list');
 
     Route::get('projetos', 'PrincipalController@projetoShow')->name('projetos.show');
     Route::post('projetos', 'PrincipalController@servicoCreate')->name('servico.create');

@@ -33,4 +33,9 @@ class Usuario extends Model
         'admin', 
         'status'
     ];
+
+    public function cliente()
+    {
+        return $this->hasOne(Cliente::class);
+    }
 }

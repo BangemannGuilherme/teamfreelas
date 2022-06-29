@@ -22,7 +22,7 @@ class PrincipalController extends Controller
             $usuario = User::select('users.*', 'endereco.*', 'contato.*', 'freelancer.*', 'habilidade.*')
                             ->leftJoin('endereco', 'users.id', '=', 'endereco.usuario_id')
                             ->leftJoin('contato', 'users.id', '=', 'contato.usuario_id')
-                            ->leftJoin('freelancer', 'users.id', '=', 'freelancer.usuario_id')
+                            ->leftJoin('freelancer', 'users.id', '=', 'freelancer.user_id')
                             ->leftJoin('tem_habilidade', 'tem_habilidade.freelancer_id', '=', 'freelancer.id')
                             ->leftJoin('habilidade', 'habilidade.id', '=', 'tem_habilidade.habilidade_id')
                             ->where('username', $username)->first();
@@ -35,7 +35,7 @@ class PrincipalController extends Controller
         }
     }
 
-    public function perfilUsuarioAtualizar(Request $request, $usuario_id)
+    public function perfilUsuarioAtualizar(Request $request, $user_id)
     {
         try
         {
@@ -54,7 +54,7 @@ class PrincipalController extends Controller
                 {
                     if ( $table[0] === 'usuario' )
                     {
-                        $usuario = User::where('id', $usuario_id)->first();
+                        $usuario = User::where('id', $user_id)->first();
                         if ( $usuario )
                         {
                             $usuario->$column = $data[$key];
@@ -63,7 +63,7 @@ class PrincipalController extends Controller
                     }
                     else if ( $table[0] === 'endereco' )
                     {
-                        $endereco = Endereco::where('usuario_id', $usuario_id)->first();
+                        $endereco = Endereco::where('user_id', $user_id)->first();
                         if ( $endereco )
                         {
                             $endereco->$column = $data[$key];
@@ -73,7 +73,7 @@ class PrincipalController extends Controller
                     }
                     else if ( $table[0] === 'contato' )
                     {
-                        $contato = Contato::where('usuario_id', $usuario_id)->first();
+                        $contato = Contato::where('user_id', $user_id)->first();
                         if ( $contato )
                         {
                             $contato->$column = $data[$key];
@@ -104,44 +104,44 @@ class PrincipalController extends Controller
     public function freelancerShow()
     {
         {
-            $freelancer = Freelancer::select('users.*', 'endereco.*', 'contato.*', 'freelancer.*', 'habilidade.*')
-                            ->leftJoin('endereco', 'users.id', '=', 'endereco.usuario_id')
-                            ->leftJoin('contato', 'users.id', '=', 'contato.usuario_id')
-                            ->leftJoin('freelancer', 'users.id', '=', 'freelancer.usuario_id')
-                            ->leftJoin('tem_habilidade', 'tem_habilidade.freelancer_id', '=', 'freelancer.id')
-                            ->leftJoin('habilidade', 'habilidade.id', '=', 'tem_habilidade.habilidade_id')
-                            ->get();
-
+            if( Auth::check())
+        {
+            $freelancer = Freelancer::where("user_id", Auth::user()->id)->first();
             return view('freelancer.freelancer', compact('freelancer'));
+        } else {
+            return view('auth.login');
+        }
         }
 
 
+    }
+
+    public function freelancerList()
+    {
+        
+        $freelancers = Freelancer::all();
+        
+        return view('freelancer.freelancer', compact('freelancers'));
     }
 
     public function projetoShow()
     {
         if( Auth::check())
         {
-            $cliente = Cliente::where("usuario_id", Auth::user()->id)->first();
+            $cliente = Cliente::where("user_id", Auth::user()->id)->first();
             return view('projeto.projeto', compact('cliente'));
         } else {
             return view('auth.login');
         }
     }
 
-    public function servicoShow()
+    public function projetoList()
     {
-        {
-            $servico = User::select('users.*', 'endereco.*', 'contato.*', 'freelancer.*', 'habilidade.*')
-                            ->leftJoin('endereco', 'users.id', '=', 'endereco.usuario_id')
-                            ->leftJoin('contato', 'users.id', '=', 'contato.usuario_id')
-                            ->leftJoin('freelancer', 'users.id', '=', 'freelancer.usuario_id')
-                            ->leftJoin('tem_habilidade', 'tem_habilidade.freelancer_id', '=', 'freelancer.id')
-                            ->leftJoin('habilidade', 'habilidade.id', '=', 'tem_habilidade.habilidade_id')
-                            ->get();
+        
+        $servicos = Servico::all();      
 
-            return view('servico.servico', compact('servico'));
-        }
+        return view('servico.servico', compact('servicos'));
+        
 
     }
 

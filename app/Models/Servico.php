@@ -30,4 +30,9 @@ class Servico extends Model
         'complexidade',
         'data_estimada'
     ];
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
 }
