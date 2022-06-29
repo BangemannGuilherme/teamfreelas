@@ -23,11 +23,16 @@ class Servico extends Model
     protected $fillable = [
         'id',
         'cliente_id',
+        'titulo',
         'descricao',
         'habilidade_principal_id', 
-        'tipo_pagamento_id', 
         'valor_pagamento',
         'complexidade',
         'data_estimada'
     ];
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
 }

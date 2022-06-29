@@ -7,20 +7,6 @@
 @section('content')
 <h1>Criar Usuario</h1>
 <hr>
-{{-- CAMPOS --}}
-{{-- 'id',
-'username',
-'password',
-'nome',
-'sobrenome',
-'email',
-'data_nascimento',
-'created_at', 
-'updated_at', 
-'deleted_at', 
-'remember_token', 
-'admin', 
-'status' --}}
 
 <div class="col-md-12 text-right">
     <a class="btn btn-primary" href="{{url('admin/users/') }}"><i class="fas fa-undo-alt"></i> Voltar</a>

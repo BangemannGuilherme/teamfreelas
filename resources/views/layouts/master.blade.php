@@ -52,9 +52,9 @@
                 </div>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a class="nav-link page-scroll" href="#team">Publicar Projeto</a></li>
-                        <li><a class="nav-link page-scroll" href="#testimonials">Encontre Freelancers</a></li>
-                        <li><a class="nav-link page-scroll" href="#pricing">Encontre Trabalho</a></li>
+                        <li><a class="nav-link page-scroll" href="{{ route('projetos.show') }}">Publicar Projeto</a></li>
+                        <li><a class="nav-link page-scroll" href="{{ route('freelancers.list') }}">Encontre Freelancers</a></li>
+                        <li><a class="nav-link page-scroll" href="{{ route('projetos.list') }}" >Encontre Trabalho</a></li>
                         <li><a class="nav-link page-scroll" href="#contact">Contato</a></li>
                         <li>&emsp;&emsp;&emsp;</li>
                     </ul>
@@ -122,61 +122,5 @@
             </div>
         </div>
     </section>
-
-    <script>
-
-        $(document).ready(function () {
-
-            $('body').scrollspy({
-                target: '#navbar',
-                offset: 80
-            });
-
-            // Page scrolling feature
-            $('a.page-scroll').bind('click', function(event) {
-                var link = $(this);
-                $('html, body').stop().animate({
-                    scrollTop: $(link.attr('href')).offset().top - 50
-                }, 500);
-                event.preventDefault();
-                $("#navbar").collapse('hide');
-            });
-        });
-
-        var cbpAnimatedHeader = (function() {
-            var docElem = document.documentElement,
-                    header = document.querySelector( '.navbar-default' ),
-                    didScroll = false,
-                    changeHeaderOn = 10;
-            function init() {
-                window.addEventListener( 'scroll', function( event ) {
-                    if( !didScroll ) {
-                        didScroll = true;
-                        setTimeout( scrollPage, 150 );
-                    }
-                }, false );
-            }
-            function scrollPage() {
-                var sy = scrollY();
-                if ( sy >= changeHeaderOn ) {
-                    $(header).addClass('navbar-scroll')
-                }
-                else {
-                    $(header).removeClass('navbar-scroll')
-                }
-                didScroll = false;
-            }
-            function scrollY() {
-                return window.pageYOffset || docElem.scrollTop;
-            }
-            init();
-
-        })();
-
-        // Activate WOW.js plugin for animation on scrol
-        new WOW().init();
-
-    </script>
-
 </body>
 </html>

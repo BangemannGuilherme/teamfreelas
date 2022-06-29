@@ -24,9 +24,19 @@ class Cliente extends Model
      */
     protected $fillable = [
         'id',
-        'usuario_id',
+        'user_id',
         'data_registro',
         'localizacao',
         'empresa_id'
     ];
+
+     public function servico()
+     {
+         return $this->hasOne(Servico::class);
+     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -51,6 +51,14 @@ Route::middleware(['web'])->group(function () {
     Route::post('registro', 'AuthController@registro')->name('registro');
 
     Route::get('logout', 'AuthController@logout')->name('logout');
+
+    Route::get('freelancers', 'PrincipalController@freelancerShow')->name('freelancers.show');
+
+    Route::get('projetos/listagem', 'PrincipalController@projetoList')->name('projetos.list');
+    Route::get('freelancers/listagem', 'PrincipalController@freelancerList')->name('freelancers.list');
+
+    Route::get('projetos', 'PrincipalController@projetoShow')->name('projetos.show');
+    Route::post('projetos', 'PrincipalController@servicoCreate')->name('servico.create');
 });
 
 // Page Routes Auth

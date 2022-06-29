@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Contato;
 use App\Models\Endereco;
+use App\Models\Freelancer;
+use App\Models\Servico;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,11 +19,14 @@ class PrincipalController extends Controller
     {
         if ( Auth::check() && Auth::user()->username == $username )
         {
-            $usuario = User::select('users.*', 'endereco.*', 'contato.*')
-                            ->join('endereco', 'users.id', '=', 'endereco.usuario_id')
-                            ->join('contato', 'users.id', '=', 'contato.usuario_id')
+            $usuario = User::select('users.*', 'endereco.*', 'contato.*', 'freelancer.*', 'habilidade.*')
+                            ->leftJoin('endereco', 'users.id', '=', 'endereco.usuario_id')
+                            ->leftJoin('contato', 'users.id', '=', 'contato.usuario_id')
+                            ->leftJoin('freelancer', 'users.id', '=', 'freelancer.user_id')
+                            ->leftJoin('tem_habilidade', 'tem_habilidade.freelancer_id', '=', 'freelancer.id')
+                            ->leftJoin('habilidade', 'habilidade.id', '=', 'tem_habilidade.habilidade_id')
                             ->where('username', $username)->first();
-        
+
             return view('usuario.perfil', compact('usuario'));
         }
         else
@@ -29,7 +35,7 @@ class PrincipalController extends Controller
         }
     }
 
-    public function perfilUsuarioAtualizar(Request $request, $usuario_id)
+    public function perfilUsuarioAtualizar(Request $request, $user_id)
     {
         try
         {
@@ -48,7 +54,7 @@ class PrincipalController extends Controller
                 {
                     if ( $table[0] === 'usuario' )
                     {
-                        $usuario = User::where('id', $usuario_id)->first();
+                        $usuario = User::where('id', $user_id)->first();
                         if ( $usuario )
                         {
                             $usuario->$column = $data[$key];
@@ -57,7 +63,7 @@ class PrincipalController extends Controller
                     }
                     else if ( $table[0] === 'endereco' )
                     {
-                        $endereco = Endereco::where('usuario_id', $usuario_id)->first();
+                        $endereco = Endereco::where('user_id', $user_id)->first();
                         if ( $endereco )
                         {
                             $endereco->$column = $data[$key];
@@ -67,7 +73,7 @@ class PrincipalController extends Controller
                     }
                     else if ( $table[0] === 'contato' )
                     {
-                        $contato = Contato::where('usuario_id', $usuario_id)->first();
+                        $contato = Contato::where('user_id', $user_id)->first();
                         if ( $contato )
                         {
                             $contato->$column = $data[$key];
@@ -92,6 +98,68 @@ class PrincipalController extends Controller
                 'error' => 'error'
             ];
         }
+    }
+
+
+    public function freelancerShow()
+    {
+        {
+            if( Auth::check())
+        {
+            $freelancer = Freelancer::where("user_id", Auth::user()->id)->first();
+            return view('freelancer.freelancer', compact('freelancer'));
+        } else {
+            return view('auth.login');
+        }
+        }
+
+
+    }
+
+    public function freelancerList()
+    {
+        
+        $freelancers = Freelancer::all();
+        
+        return view('freelancer.freelancer', compact('freelancers'));
+    }
+
+    public function projetoShow()
+    {
+        if( Auth::check())
+        {
+            $cliente = Cliente::where("user_id", Auth::user()->id)->first();
+            return view('projeto.projeto', compact('cliente'));
+        } else {
+            return view('auth.login');
+        }
+    }
+
+    public function projetoList()
+    {
+        
+        $servicos = Servico::all();      
+
+        return view('servico.servico', compact('servicos'));
+        
+
+    }
+
+    
+
+    public function servicoCreate(Request $request){
+        
+        Servico::create([
+            'cliente_id' => $request->input('cliente_id'),
+            'titulo' => $request->input('titulo'),
+            'descricao' => $request->input('descricao'),
+            'habilidade_principal_id' => $request->input('habilidade'),
+            'valor_pagamento' => $request->input('valor_pagamento'),
+            'complexidade' => $request->input('complexidade'),
+            'data_estimada' => $request->input('data_estimada'),
+        ]);
+
+        return view('home');
     }
 
     /**
