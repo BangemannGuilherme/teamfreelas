@@ -52,13 +52,14 @@ Route::middleware(['web'])->group(function () {
 
     Route::get('logout', 'AuthController@logout')->name('logout');
 
-    Route::get('freelancers', 'PrincipalController@freelancerShow')->name('freelancers.show');
+    Route::get('freelancers', 'PrincipalController@freelancer')->name('freelancer.list');
 
-    Route::get('projetos/listagem', 'PrincipalController@projetoList')->name('projetos.list');
-    Route::get('freelancers/listagem', 'PrincipalController@freelancerList')->name('freelancers.list');
+    Route::get('servicos', 'PrincipalController@servico')->name('servico.list');
+    Route::get('servicos/create', 'PrincipalController@servicoCreate')->name('servico.create');
+    Route::post('servicos/create', 'PrincipalController@servicoStore')->name('servico.store');
 
-    Route::get('projetos', 'PrincipalController@projetoShow')->name('projetos.show');
-    Route::post('projetos', 'PrincipalController@servicoCreate')->name('servico.create');
+    Route::get('proposta/{id}', 'PrincipalController@propostaShow')->name('proposta.show');
+
 });
 
 // Page Routes Auth

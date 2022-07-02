@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Contato;
 use App\Models\Endereco;
 use App\Models\Freelancer;
+use App\Models\Proposta;
 use App\Models\Servico;
 use App\Models\User;
 use Exception;
@@ -100,54 +101,20 @@ class PrincipalController extends Controller
         }
     }
 
-
-    public function freelancerShow()
+    public function servicoCreate()
     {
-        {
-            if( Auth::check())
-        {
-            $freelancer = Freelancer::where("user_id", Auth::user()->id)->first();
-            return view('freelancer.freelancer', compact('freelancer'));
-        } else {
-            return view('auth.login');
-        }
-        }
-
-
-    }
-
-    public function freelancerList()
-    {
-        
-        $freelancers = Freelancer::all();
-        
-        return view('freelancer.freelancer', compact('freelancers'));
-    }
-
-    public function projetoShow()
-    {
-        if( Auth::check())
+        if( Auth::check() )
         {
             $cliente = Cliente::where("user_id", Auth::user()->id)->first();
-            return view('projeto.projeto', compact('cliente'));
-        } else {
+            return view('servico.create', compact('cliente'));
+        }
+        else
+        {
             return view('auth.login');
         }
     }
 
-    public function projetoList()
-    {
-        
-        $servicos = Servico::all();      
-
-        return view('servico.servico', compact('servicos'));
-        
-
-    }
-
-    
-
-    public function servicoCreate(Request $request){
+    public function servicoStore(Request $request){
         
         Servico::create([
             'cliente_id' => $request->input('cliente_id'),
@@ -160,6 +127,27 @@ class PrincipalController extends Controller
         ]);
 
         return view('home');
+    }
+
+    public function servico()
+    {
+        $servicos = Servico::all();
+
+        return view('servico.servico', compact('servicos'));
+    }
+
+    public function freelancer()
+    {
+        $freelancers = Freelancer::all();
+        
+        return view('freelancer.freelancer', compact('freelancers'));
+    }
+
+    public function propostaShow($id)
+    {
+        $servico = Servico::where('id', $id)->first();      
+
+        return view('proposta.proposta', compact('servico'));
     }
 
     /**
