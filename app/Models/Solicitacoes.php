@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Proposta extends Model
+class Solicitacoes extends Model
 {
+    use HasFactory;
+
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'proposta';
+    protected $table = 'solicitacoes';
     protected $primaryKey = 'id';
 
     /**
@@ -24,11 +26,11 @@ class Proposta extends Model
         'id',
         'servico_id',
         'freelancer_id',
-        'data_proposta', 
-        'tipo_pagamento_id', 
-        'valor_pagamento',
-        'status_proposta_id',
-        'comentario_cliente',
-        'comentario_freelancer'
+        'status_id'
     ];
+
+    public function freelancer()
+    {
+        return $this->belongsTo(Freelancer::class);
+    }
 }

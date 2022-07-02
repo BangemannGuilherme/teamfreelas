@@ -1,7 +1,7 @@
 <div class="ibox">
     <div class="ibox-title">
+        <h5> {{ ucfirst($freelancer->user->nome) }} {{ ucfirst($freelancer->user->sobrenome) }} </h5> 
         <span class="label label-primary float-right">NOVO!</span>
-         <h5> {{ ucfirst($freelancer->user->nome) }} {{ ucfirst($freelancer->user->sobrenome) }} </h5> 
     </div>
     <div class="ibox-content">
         <div class="row">

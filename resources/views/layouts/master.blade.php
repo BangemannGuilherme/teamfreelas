@@ -52,9 +52,9 @@
                 </div>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a class="nav-link page-scroll" href="{{ route('projetos.show') }}">Publicar Projeto</a></li>
-                        <li><a class="nav-link page-scroll" href="{{ route('freelancers.list') }}">Encontre Freelancers</a></li>
-                        <li><a class="nav-link page-scroll" href="{{ route('projetos.list') }}" >Encontre Trabalho</a></li>
+                        <li><a class="nav-link page-scroll" href="{{ route('servico.create') }}">Publicar Projeto</a></li>
+                        <li><a class="nav-link page-scroll" href="{{ route('servico.list') }}" >Projetos publicados</a></li>
+                        <li><a class="nav-link page-scroll" href="{{ route('freelancer.list') }}">Freelancers disponíveis</a></li>
                         <li><a class="nav-link page-scroll" href="#contact">Contato</a></li>
                         <li>&emsp;&emsp;&emsp;</li>
                     </ul>
@@ -81,7 +81,7 @@
                 <div class="col-lg-12 text-center">
                     <div class="navy-line"></div>
                     <h1>Fale Conosco</h1>
-                    <p>Para qualquer dúvida ou informações não hesite em nos contatar.</p>
+                    <p>Se tiver alguma dúvida, não hesite em nos contatar.</p>
                 </div>
             </div>
             <div class="row m-b-lg justify-content-center">
@@ -101,7 +101,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <a href="mailto:test@email.com" class="btn btn-success">Mandar Email</a>
+                    <a href="mailto:teamfreelas@gmail.com" class="btn btn-success">Mandar Email</a>
                     <p class="m-t-sm">
                         Siga-nos nas redes sociais
                     </p>
@@ -117,7 +117,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center m-t-lg m-b-lg">
-                    <p><strong>&copy; 2015 Company Name</strong><br/> consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                    <p><strong>&copy; 2022 TeamFreelas</strong><br/> Sempre criando, inovando, proporcionando e permitindo que o seu projeto saia do papel.</p>
                 </div>
             </div>
         </div>

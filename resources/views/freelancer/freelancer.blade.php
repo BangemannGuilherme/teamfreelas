@@ -3,7 +3,7 @@
 @section('content')
 <div class="container" style="margin-top: 4%;">
     <div class="col-md-12">
-        <h1>LISTAGEM DE SERVIÇOS DISPONÍVEIS</h1>
+        <h1>LISTAGEM DE FREELANCERS DISPONÍVEIS</h1>
         <div class="col-md-4">
             Info Filtro
         </div>
@@ -23,3 +23,9 @@
         $('.navbar-default').addClass('navbar-scroll');
     }
 </script>
+
+<style>
+    .ibox-title {
+        padding: 15px 15px 4px 15px !important;
+    }
+</style>
