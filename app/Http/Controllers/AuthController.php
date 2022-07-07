@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cliente;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -157,7 +159,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'nome' => $data['nome'],
             'sobrenome' => $data['sobrenome'],
             'email' => $data['email'],
@@ -167,5 +169,13 @@ class AuthController extends Controller
             'admin' => $data['admin'],
             'status' => $data['status'],
         ]);
+
+        $cliente = Cliente::create([
+            'user_id' => $user->id,
+            'data_registro' => Carbon::now()->format('d/m/Y'),
+            'empresa_id' => null
+        ]);
+
+        return redirect()->route('usuario.perfil', ['username' => $user->username]);
     }
 }

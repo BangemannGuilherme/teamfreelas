@@ -1,6 +1,6 @@
 <tr>
     <td>{{ $freelancer->id }}</td>
-    <td>{{ $freelancer->usuario_id }}</td>
+    <td>{{ $freelancer->user_id }}</td>
     <td>{{ $freelancer->data_registro }}</td>
     <td>{{ $freelancer->localizacao }}</td>
     <td>{{ $freelancer->descricao }}</td>

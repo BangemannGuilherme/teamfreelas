@@ -24,5 +24,17 @@
         @else
         <button title="Desbloquear (Ativar)" class="btn btn-primary ${user_logado} ${user_ativo}" onClick="ativarUsuario({{ $usuario->id }})"><i class="fa fa-lock-open fa-fw"></i></button>
         @endif
+        @if ($usuario->username == 'admin')
+        <a title="Excluir Usuário" class="btn btn-danger disabled" href=""><i class="fas fa-trash-alt"></i></a>
+        @else
+        <a title="Excluir Usuário" class="btn btn-danger" href="{{ route('usuario.destroy',  ['id' => $usuario->id]) }}"><i class="fas fa-trash-alt"></i></a>
+        @endif
     </td>
 </tr>
+
+<style>
+    a.disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+</style>

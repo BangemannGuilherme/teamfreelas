@@ -92,7 +92,7 @@
                                         <dt>Data estimada:</dt>
                                     </div>
                                     <div class="col-sm-8 text-sm-left">
-                                        <dd class="mb-1">{{ Carbon\Carbon::parse($servico->created_at)->format('d/m/Y h:i:s') }}</dd>
+                                        <dd class="mb-1">{{ Carbon\Carbon::parse($servico->data_estimada)->format('d/m/Y') }}</dd>
                                     </div>
                                 </dl>
                                 {{-- <dl class="row mb-0">
@@ -140,11 +140,16 @@
                                 </dl>
                                 <dl class="row mb-0 text-right">
                                     <div class="col-sm-12 text-sm-right">
-                                        <a class="btn btn-success btn-outline btn-sm" href="{{ route('proposta.show', ['id' => $servico->id]) }}">Enviar solicitação</a>
+                                        <button type="button" class="btn btn-success btn-outline btn-sm" data-toggle="modal" data-target="#enviarSolicitacao">
+                                            Enviar solicitação
+                                        </button>
                                     </div>
                                 </dl>
                             </div>
                         </div>
+
+                        @include('servico.modal')
+
                         {{-- <div class="row">
                             <div class="col-lg-12">
                                 <dl class="row mb-0">
@@ -504,11 +509,8 @@
             </div>
         </div>
     </div>
-</div>   
+</div>
 @endsection
 
-<script>
-    window.onload = function(){
-        $('.navbar-default').addClass('navbar-scroll');
-    }
-</script>
+@include('javascript-page')
+@include('css-page')

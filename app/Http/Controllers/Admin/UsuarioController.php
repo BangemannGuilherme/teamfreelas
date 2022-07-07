@@ -126,7 +126,7 @@ class UsuarioController extends Controller
     {
         Usuario::destroy($id);
 
-        return view('admin.usuario.index');
+        return redirect('admin/users');
     }
 
     /**

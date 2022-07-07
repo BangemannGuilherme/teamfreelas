@@ -35,8 +35,16 @@ Route::middleware(['web'])->group(function () {
         Route::get('propostas', 'Admin\\PropostaController@index')->name('proposta');
 
         Route::get('servicos', 'Admin\\ServicoController@index')->name('servico');
+        Route::get('servicos/destroy/{id}', 'Admin\\ServicoController@destroy')->name('servico.destroy');
 
         Route::get('contratos', 'Admin\\ContratoController@index')->name('contrato');
+
+        Route::get('status', 'Admin\\StatusController@index')->name('status');
+        Route::get('status/create', 'Admin\\StatusController@create')->name('status.create');
+        Route::post('status/create', 'Admin\\StatusController@store')->name('status.store');
+        Route::get('status/edit/{id}', 'Admin\\StatusController@edit')->name('status.edit');
+        Route::post('status/edit/{id}', 'Admin\\StatusController@update')->name('status.update');
+        Route::get('status/destroy/{id}', 'Admin\\StatusController@destroy')->name('status.destroy');
     });
 });
 
@@ -57,9 +65,9 @@ Route::middleware(['web'])->group(function () {
     Route::get('servicos', 'PrincipalController@servico')->name('servico.list');
     Route::get('servicos/create', 'PrincipalController@servicoCreate')->name('servico.create');
     Route::post('servicos/create', 'PrincipalController@servicoStore')->name('servico.store');
+    Route::get('servicos/{id}', 'PrincipalController@servicoShow')->name('servico.show');
 
-    Route::get('proposta/{id}', 'PrincipalController@propostaShow')->name('proposta.show');
-
+    Route::post('solicitacao/create', 'PrincipalController@solicitacaoStore')->name('solicitacao.store');
 });
 
 // Page Routes Auth

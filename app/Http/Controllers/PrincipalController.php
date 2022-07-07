@@ -8,6 +8,7 @@ use App\Models\Endereco;
 use App\Models\Freelancer;
 use App\Models\Proposta;
 use App\Models\Servico;
+use App\Models\Solicitacoes;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -114,9 +115,9 @@ class PrincipalController extends Controller
         }
     }
 
-    public function servicoStore(Request $request){
-        
-        Servico::create([
+    public function servicoStore(Request $request)
+    {    
+        $servico = Servico::create([
             'cliente_id' => $request->input('cliente_id'),
             'titulo' => $request->input('titulo'),
             'descricao' => $request->input('descricao'),
@@ -126,28 +127,44 @@ class PrincipalController extends Controller
             'data_estimada' => $request->input('data_estimada'),
         ]);
 
-        return view('home');
+        return redirect()->route('servico.show', ['id' => $servico->id]);
     }
 
     public function servico()
     {
-        $servicos = Servico::all();
+        $servicos = Servico::join('cliente', 'cliente_id', '=', 'cliente.id')
+                            ->join('users', 'cliente.user_id', '=', 'users.id')
+                            ->get();
 
         return view('servico.servico', compact('servicos'));
     }
 
-    public function freelancer()
-    {
-        $freelancers = Freelancer::all();
-        
-        return view('freelancer.freelancer', compact('freelancers'));
-    }
-
-    public function propostaShow($id)
+    public function servicoShow($id)
     {
         $servico = Servico::where('id', $id)->first();      
 
-        return view('proposta.proposta', compact('servico'));
+        return view('servico.show', compact('servico'));
+    }
+
+    public function solicitacaoStore(Request $request)
+    {
+        $freelancer = Freelancer::where('user_id', $request->input('user_id'))->first();
+
+        $solicitacao = Solicitacoes::create([
+            'servico_id' => $request->input('servico_id'),
+            'freelancer_id' => $freelancer->id,
+            'status_id' => 1,
+            'mensagem' => $request->input('mensagem'),
+        ]);
+
+        return redirect()->route('servico.show', ['id' => $request->input('servico_id')]);
+    }
+
+    public function freelancer()
+    {
+        $freelancers = Freelancer::join('users', 'freelancer.user_id', '=', 'users.id')->get();
+
+        return view('freelancer.freelancer', compact('freelancers'));
     }
 
     /**

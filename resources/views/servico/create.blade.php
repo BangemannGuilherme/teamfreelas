@@ -10,61 +10,58 @@
                     <div class="col-md-12">
                         <form class="m-t" role="form" method="POST" action="{{ route('servico.create') }}">
                             @csrf
-                                <div class="col-sm-12">
-                                    <div class="form-group {{ $errors->has('username') ? 'has-error' : ''}}">
-                                        <label for="titulo">Título</label>
-                                        <input type="text" class="form-control" name="titulo" placeholder="Título">
-                                    </div>
-                                </div>    
+                            <div class="col-sm-12">
+                                <div class="form-group {{ $errors->has('username') ? 'has-error' : ''}}">
+                                    <label for="titulo">Título</label>
+                                    <input type="text" class="form-control" name="titulo" placeholder="Título">
+                                </div>
+                            </div>    
 
                             <div class="col-sm-12">
-                                    <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
-                                        <label for="descricao">Descrição</label>
-                                        <textarea type="text" class="form-control" name="descricao" placeholder="Descrição"></textarea>
-                                    </div>
+                                <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
+                                    <label for="descricao">Descrição</label>
+                                    <textarea type="text" class="form-control" name="descricao" placeholder="Descrição"></textarea>
+                                </div>
                             </div>
-                    
 
-                                <div class="col-sm-12">
-                                    <div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
-                                        <label for="valor_pagamento">Valor Pagamento</label>
-                                        <input type="text" class="form-control" name="valor_pagamento" placeholder="Valor Pagamento">
-                                    </div>
+                            <div class="col-sm-12">
+                                <div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
+                                    <label for="valor_pagamento">Valor Pagamento</label>
+                                    <input type="text" class="form-control" name="valor_pagamento" placeholder="Valor Pagamento">
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group {{ $errors->has('sobrenome') ? 'has-error' : ''}}">
-                                        <label for="complexidade">Complexidade</label>
-                                        <select type="select" class="form-control select2" name="complexidade" placeholder="Complexidade">
-                                            <option> Baixa </option>
-                                            <option> Média</option>
-                                            <option> Alta </option>
-                                        </select>
-                                    </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group {{ $errors->has('sobrenome') ? 'has-error' : ''}}">
+                                    <label for="complexidade">Complexidade</label>
+                                    <select type="select" class="form-control select2" name="complexidade" placeholder="Complexidade">
+                                        <option> Baixa </option>
+                                        <option> Média</option>
+                                        <option> Alta </option>
+                                    </select>
                                 </div>
-                    
-
-                                <div class="col-sm-3">
-                                    <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
-                                        <label for="data_estimada">Prazo para conclusão</label>
-                                        <input type="date" class="form-control" name="data_estimada" placeholder="Data estimada">
-                                    </div>
+                            </div>
+                
+                            <div class="col-sm-3">
+                                <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
+                                    <label for="data_estimada">Prazo para conclusão</label>
+                                    <input type="date" class="form-control" name="data_estimada" placeholder="Data estimada">
                                 </div>
+                            </div>
 
-                                <div class="col-sm-3">
-                                    <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
-                                        <label for="habilidade">Habilidade desejada</label>
-                                        <select type="select" class="form-control select2" name="habilidade" placeholder="Habilidade desejada">
-                                            <option value="1"> PHP </option>
-                                            <option value="2"> Laravel </option>
-                                            <option value="3"> JavaScript </option>
-                                        </select>
-                                    </div>
+                            <div class="col-sm-3">
+                                <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
+                                    <label for="habilidade">Habilidade desejada</label>
+                                    <select type="select" class="form-control select2" name="habilidade" placeholder="Habilidade desejada">
+                                        <option value="1"> PHP </option>
+                                        <option value="2"> Laravel </option>
+                                        <option value="3"> JavaScript </option>
+                                    </select>
                                 </div>
+                            </div>
 
-                                <input type="hidden" class="form-control" name="cliente_id" value="{{ $cliente->id }}">
+                            <input type="hidden" class="form-control" name="cliente_id" value="{{ $cliente->id }}">
 
-                    
-                    
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-success block m-b">Salvar</button>
@@ -79,8 +76,5 @@
 
 @endsection
 
-<script>
-    window.onload = function(){
-        $('.navbar-default').addClass('navbar-scroll');
-    }
-</script>
+@include('javascript-page')
+@include('css-page')

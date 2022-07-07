@@ -77,6 +77,9 @@
                         <a href="/admin/contratos"><i class="fa-solid fa-file-signature"></i> <span class="nav-label">Contratos</span></a>
                     </li>
                     <li>
+                        <a href="/admin/status"><i class="fa-solid fa-diagram-project"></i> <span class="nav-label">Status</span></a>
+                    </li>
+                    <li>
                         <a href="/admin/graphs"><i class="fas fa-chart-area"></i> <span class="nav-label">Gráficos</span></a>
                     </li>
                     <li>

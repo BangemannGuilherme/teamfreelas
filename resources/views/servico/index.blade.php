@@ -40,7 +40,7 @@
         </div>
         <div class="row m-t-sm">
             <div class="col-sm-12 text-right">
-                <a class="btn btn-success" href="{{ route('proposta.show', ['id' => $servico->id]) }}">Encaminhar proposta!</a>
+                <a class="btn btn-success" href="{{ route('servico.show', ['id' => $servico->id]) }}">Encaminhar proposta!</a>
             </div>
         </div>
 
