@@ -61,7 +61,7 @@
                             {{ $usuario->nome_habilidade }}
                         </li>
                     </ul>
-                    @include('usuario.edit')
+                    @include('freelancer.edit')
                     {{-- <a class="btn btn-success btn-outline" href="{{ route('usuario.perfil.editar', ['username' => Auth::user()->username]) }}">Editar informações</a> --}}
                 </div>
             </div>
@@ -99,7 +99,11 @@
                             {{ $usuario->nome_habilidade }}
                         </li>
                     </ul>
-                    @include('usuario.edit')
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a class="btn btn-success" href="{{ route('usuario.projetos', ['username' => $usuario->username]) }}"><i class="fa-solid fa-laptop-code"></i> Projetos Cadastrados</a>
+                        </div>
+                    </div>
                     {{-- <a class="btn btn-success btn-outline" href="{{ route('usuario.perfil.editar', ['username' => Auth::user()->username]) }}">Editar informações</a> --}}
                 </div>
             </div>

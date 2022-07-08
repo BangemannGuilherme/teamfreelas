@@ -74,4 +74,6 @@ Route::middleware(['web'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('perfil/{username}', 'PrincipalController@perfilUsuario')->name('usuario.perfil');
     Route::post('perfil/{id}', 'PrincipalController@perfilUsuarioAtualizar')->name('usuario.perfil.update');
+    
+    Route::get('perfil/{username}/projetos', 'PrincipalController@projetosUsuario')->name('usuario.projetos');
 });

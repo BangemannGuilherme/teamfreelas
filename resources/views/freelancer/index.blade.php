@@ -27,7 +27,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="font-bold">DATA DE REGISTRO</div>
-                 {{ Carbon\Carbon::parse($freelancer->data_registro)->format('d/m/Y') }}
+                 {{ Carbon\Carbon::parse($freelancer->created_at)->format('d/m/Y') }}
             </div>
             <div class="col-sm-4 text-right">
                 <div class="font-bold">LOCALIZAÇÃO</div>

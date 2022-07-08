@@ -21,9 +21,8 @@ class ClienteFactory extends Factory
     public function definition()
     {
         return [   
-            'usuario_id' =>  $this->faker->unique()->numberBetween(2, \App\Models\User::count()),
+            'user_id' =>  $this->faker->unique()->numberBetween(2, \App\Models\User::count()),
             'data_registro' => $this->faker->date("Y-m-d"),
-            'localizacao' =>  $this->faker->country(), 
             'empresa_id' => null, 
         ];
     }

@@ -1,5 +1,6 @@
 <tr>
     <td>{{ $servico->id }}</td>
+    <td>{{ $servico->titulo }}</td>
     <td>{{ $servico->descricao }}</td>
     <td>{{ $servico->complexidade }}</td>
     <td>{{ Carbon\Carbon::parse($servico->data_estimada)->format('d/m/Y') }}</td>

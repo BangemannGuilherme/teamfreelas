@@ -170,7 +170,7 @@ class AuthController extends Controller
             'status' => $data['status'],
         ]);
 
-        $cliente = Cliente::create([
+        Cliente::create([
             'user_id' => $user->id,
             'data_registro' => Carbon::now()->format('d/m/Y'),
             'empresa_id' => null

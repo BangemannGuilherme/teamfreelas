@@ -102,6 +102,22 @@ class PrincipalController extends Controller
         }
     }
 
+    public function projetosUsuario($username)
+    {
+        if ( Auth::check() && Auth::user()->username == $username )
+        {
+            $cliente = Cliente::where('user_id', Auth::id())->first();
+
+            $projetos = Servico::where('cliente_id', $cliente->id)->orderBy('created_at', 'ASC')->get();
+
+            return view('usuario.projetos', compact('projetos'));
+        }
+        else
+        {
+            return redirect()->intended('/');
+        }
+    }
+
     public function servicoCreate()
     {
         if( Auth::check() )
@@ -111,7 +127,7 @@ class PrincipalController extends Controller
         }
         else
         {
-            return view('auth.login');
+            return redirect()->route('login.index');
         }
     }
 
@@ -132,9 +148,7 @@ class PrincipalController extends Controller
 
     public function servico()
     {
-        $servicos = Servico::join('cliente', 'cliente_id', '=', 'cliente.id')
-                            ->join('users', 'cliente.user_id', '=', 'users.id')
-                            ->get();
+        $servicos = Servico::orderBy('created_at', 'ASC')->get();
 
         return view('servico.servico', compact('servicos'));
     }

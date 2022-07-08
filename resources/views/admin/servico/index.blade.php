@@ -37,6 +37,7 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th>ID</th>
+                                <th>Título</th>
                                 <th>Descrição</th>
                                 <th>Complexidade</th>
                                 <th>Data Estimada</th>
