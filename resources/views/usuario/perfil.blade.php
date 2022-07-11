@@ -3,9 +3,9 @@
 @section('content')
 <div class="container" style="margin-top: 4%;">
     <div class="col-md-12 widgets-perfil">
-        <h1>PERFIL DE USUÁRIO</h1>
+        <h1 class="text-center"><label>PERFIL DE USUÁRIO</label></h1>
         <div class="widgets-group">
-            <div class="col-md-12 widgets-subtitle"><h2 style="font-weight: bold;">Informações:</h2></div>
+            <div class="col-md-12 widgets-subtitle"><h2 style="font-weight: bold;">&nbsp;Informações:</h2></div>
             <div class="col-md-6">
                 <div class="widget ibox-content">
                     <h2><label>Nome Completo:</label>
@@ -28,17 +28,23 @@
                             {{ $usuario->celular }}, {{ $usuario->telefone_empresarial }}
                         </li>
                     </ul>
+                    
                     @include('usuario.edit')
                     {{-- <a class="btn btn-success btn-outline" href="{{ route('usuario.perfil.editar', ['username' => Auth::user()->username]) }}">Editar informações</a> --}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    <a class="btn btn-success" href="{{ route('usuario.servicos', ['username' => $usuario->username]) }}"><i class="fa-solid fa-laptop-code"></i> Projetos Cadastrados</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="col-md-12 widgets-perfil">
-        <h1>PERFIL FREELANCER</h1>
+        <h1 class="text-center"><label>PERFIL FREELANCER</label></h1>
         <div class="widgets-group">
-            <div class="col-md-12 widgets-subtitle"><h2 style="font-weight: bold;">Informações:</h2></div>
+            <div class="col-md-12 widgets-subtitle"><h2 style="font-weight: bold;">&nbsp;Informações:</h2></div>
             <div class="col-md-6">
                 <div class="widget ibox-content">
                     <h2><label>Descrição:</label>
@@ -46,37 +52,33 @@
                     </h2>
                     <ul class="list-unstyled m-t-md">
                         <li>
-                            <span class="fa fa-envelope m-r-xs"></span>
+                            <span class="fa-solid fa-trophy"></span>
                             <label>Troféu:</label>
                             {{ $usuario->trofeu }}
                         </li>
                         <li>
-                            <span class="fa fa-home m-r-xs"></span>
-                            <label>Data de Registro:</label>
-                            {{ $usuario->data_registro }}
+                            <span class="fa-regular fa-calendar"></span>
+                            <label>Data Registro:</label>
+                            {{ Carbon\Carbon::parse($usuario->data_registro)->format('d/m/Y') }}
                         </li>
                         <li>
-                            <span class="fa fa-phone m-r-xs"></span>
+                            <span class="fa-solid fa-ranking-star"></span>
                             <label>Habilidade:</label>
                             {{ $usuario->nome_habilidade }}
                         </li>
                     </ul>
-                    @include('usuario.edit')
+                    @include('freelancer.edit')
                     {{-- <a class="btn btn-success btn-outline" href="{{ route('usuario.perfil.editar', ['username' => Auth::user()->username]) }}">Editar informações</a> --}}
                 </div>
             </div>
         </div>
     </div>
 
-
 </div>
 @endsection
 
-<script>
-    window.onload = function(){
-        $('.navbar-default').addClass('navbar-scroll');
-    }
-</script>
+@include('javascript-page')
+@include('css-page')
 
 <style>
     label {

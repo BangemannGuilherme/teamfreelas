@@ -8,6 +8,7 @@ use App\Models\Endereco;
 use App\Models\Freelancer;
 use App\Models\Proposta;
 use App\Models\Servico;
+use App\Models\Solicitacoes;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -101,6 +102,68 @@ class PrincipalController extends Controller
         }
     }
 
+    public function perfilFreelancerAtualizar(Request $request, $user_id)
+    {
+        try
+        {
+            $data = $request->all();
+
+            foreach ($data as $key => $value) {
+                $table = explode('_', $key);
+                $column = strval($table[1]);
+
+                if ( isset($table[2]) )
+                {
+                    $column .= '_'.$table[2];
+                }
+
+                if ( $table[0] !== "" || $table[0] !== null )
+                {
+                    if ( $table[0] === 'freelancer' )
+                    {
+                        $freelancer = User::where('id', $user_id)->first();
+                        if ( $freelancer )
+                        {
+                            $freelancer->$column = $data[$key];
+                            $freelancer->save();
+                        }
+                    }
+                }
+            }
+
+            return redirect()->route('usuario.perfil', ['username' => Auth::user()->username]);
+        }
+        catch(Exception $e)
+        {
+            Log::error('[perfilUsuarioAtualizar] Erro ao salvar os dados do Usuário. Error ' . $e->getCode() . ': ' . $e->getMessage() . '; File: ' . $e->getFile() . '; Line: ' . $e->getLine());
+
+            return [
+                'success' => false,
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'error' => 'error'
+            ];
+        }
+    }
+
+    public function servicosUsuario($username)
+    {
+        if ( Auth::check() && Auth::user()->username == $username )
+        {
+            $cliente = Cliente::where('user_id', Auth::id())->first();
+
+            $servicos = Servico::where('cliente_id', $cliente->id)->orderBy('created_at', 'ASC')->get();
+    
+            return view('usuario.servicos', compact('servicos'));
+        }
+        else
+        {
+            return redirect()->intended('/');
+        }
+    }
+
     public function servicoCreate()
     {
         if( Auth::check() )
@@ -110,13 +173,13 @@ class PrincipalController extends Controller
         }
         else
         {
-            return view('auth.login');
+            return redirect()->route('login.index');
         }
     }
 
-    public function servicoStore(Request $request){
-        
-        Servico::create([
+    public function servicoStore(Request $request)
+    {    
+        $servico = Servico::create([
             'cliente_id' => $request->input('cliente_id'),
             'titulo' => $request->input('titulo'),
             'descricao' => $request->input('descricao'),
@@ -126,28 +189,93 @@ class PrincipalController extends Controller
             'data_estimada' => $request->input('data_estimada'),
         ]);
 
-        return view('home');
+        return redirect()->route('servico.show', ['id' => $servico->id]);
     }
 
     public function servico()
     {
-        $servicos = Servico::all();
+        $servicos = Servico::orderBy('created_at', 'ASC')->get();
 
         return view('servico.servico', compact('servicos'));
     }
 
-    public function freelancer()
-    {
-        $freelancers = Freelancer::all();
-        
-        return view('freelancer.freelancer', compact('freelancers'));
-    }
-
-    public function propostaShow($id)
+    public function servicoShow($id)
     {
         $servico = Servico::where('id', $id)->first();      
 
-        return view('proposta.proposta', compact('servico'));
+        return view('servico.show', compact('servico'));
+    }
+
+    public function solicitacaoPendente(Request $request)
+    {
+        try
+        {
+            $servico_id = $request->get('servico_id');
+            $solicitacoes = Solicitacoes::where('servico_id', $servico_id)->get();
+
+            return [
+                'success' => true,
+                'message' => 'Solicitações consultadas com sucesso!',
+                'data' => $solicitacoes
+            ];
+        }
+        catch(Exception $e)
+        {
+            Log::error('[Principal - solicitacaoPendente] Erro ao realizar a consulta. Error ' . $e->getCode() . ': ' . $e->getMessage() . '; File: ' . $e->getFile() . '; Line: ' . $e->getLine());
+
+            return [
+                'success' => false,
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'error' => 'error'
+            ];
+        }
+    }
+    
+
+    public function solicitacaoStore(Request $request)
+    {
+        try
+        {
+            $freelancer = Freelancer::where('user_id', $request->get('user_id'))->first();
+
+            $solicitacao = Solicitacoes::create([
+            'servico_id' => $request->get('servico_id'),
+            'freelancer_id' => $freelancer->id,
+            'status_id' => 1,
+            'mensagem' => $request->get('mensagem'),
+            ]);
+
+            return [
+                'success' => true,
+                'message' => 'Solicitação enviada com sucesso!'
+            ];
+        }
+        catch(Exception $e)
+        {
+            Log::error('[Principal - solicitacaoPendente] Erro ao realizar a consulta. Error ' . $e->getCode() . ': ' . $e->getMessage() . '; File: ' . $e->getFile() . '; Line: ' . $e->getLine());
+
+            return [
+                'success' => false,
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'error' => 'error'
+            ];
+        }
+        
+
+        return redirect()->route('servico.show', ['id' => $request->input('servico_id')]);
+    }
+
+    public function freelancer()
+    {
+        $freelancers = Freelancer::join('users', 'freelancer.user_id', '=', 'users.id')->get();
+
+        return view('freelancer.freelancer', compact('freelancers'));
     }
 
     /**

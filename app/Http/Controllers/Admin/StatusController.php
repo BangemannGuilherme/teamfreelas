@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Servico;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
-class ServicoController extends Controller
+class StatusController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -25,9 +25,10 @@ class ServicoController extends Controller
      */
     public function index()
     {
-        $servicos = Servico::all();
-        return view('admin.servico.index', compact('servicos'));
+        $statuses = Status::orderBy('id')->get();
+        return view('admin.status.index', compact('statuses'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +36,7 @@ class ServicoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.status.create');
     }
 
     /**
@@ -46,7 +47,9 @@ class ServicoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Status::create($request->all());
+
+        return redirect('admin/status');
     }
 
     /**
@@ -68,7 +71,13 @@ class ServicoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $status = Status::where('id', $id)->first();
+
+        return view('admin.status.edit', [
+            'id' =>  $status->id,
+            'nome' =>  $status->nome,
+            'cor' =>  $status->cor
+        ]);
     }
 
     /**
@@ -80,7 +89,15 @@ class ServicoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $status = Status::find($id);
+        $status->nome = $data['nome'];
+        $status->cor = $data['cor'];
+
+        $status->save();
+
+        return view('admin.status.index');
     }
 
     /**
@@ -91,8 +108,8 @@ class ServicoController extends Controller
      */
     public function destroy($id)
     {
-        Servico::destroy($id);
+        Status::destroy($id);
 
-        return back();
+        return redirect('admin/status');
     }
 }

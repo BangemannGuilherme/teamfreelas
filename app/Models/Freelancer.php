@@ -35,4 +35,9 @@ class Freelancer extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function solicitacoes()
+    {
+        return $this->hasMany(Solicitacoes::class);
+    }
 }

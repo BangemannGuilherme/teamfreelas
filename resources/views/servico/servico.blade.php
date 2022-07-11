@@ -18,11 +18,8 @@
 </div>
 @endsection
 
-<script>
-    window.onload = function(){
-        $('.navbar-default').addClass('navbar-scroll');
-    }
-</script>
+@include('javascript-page')
+@include('css-page')
 
 <style>
     .ibox-title {

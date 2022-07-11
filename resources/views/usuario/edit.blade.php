@@ -1,4 +1,4 @@
-<!-- Modal LDAP -->
+<!-- Modal Perfil -->
 <!-- Botão Abrir Modal -->
 <div class="text-left">
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#divModalPerfil"><i class="fa-solid fa-pen-to-square"></i> Editar informações</button>

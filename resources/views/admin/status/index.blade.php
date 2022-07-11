@@ -1,8 +1,8 @@
 @extends('admin.layouts.master')
 
-@section('breadcrumb', 'Servico')
+@section('breadcrumb', 'Status')
 
-@section('title', 'Servico')
+@section('title', 'Status')
 
 @section('content')
 {{-- <div class="content"> --}}
@@ -17,6 +17,7 @@
         </div>
     </div> --}}
     <div class="row">
+        <div class="col-md-12 text-right"><a class="btn btn-primary" href="{{ url('admin/status/create/') }}"><i class="fas fa-plus"></i> Cadastrar Status</a></div>
         <div class="col-md-12">
             <div class="table-responsive no-padding">
                 <div class="dataTables_wrapper no-footer">
@@ -33,21 +34,19 @@
                             <button type="submit" class="btn btn-default btn-lg btn-margin" value="Search" onClick="limpaBusca()">Limpar</button>
                         </div>
                     </form> --}}
-                    <table id="user_table" class="table table-hover table-bordered table-datatable table-striped" role="grid">
+                    <table id="status_table" class="table table-hover table-bordered table-datatable table-striped" role="grid">
                         <thead class="thead-dark">
                             <tr>
                                 <th>ID</th>
-                                <th>Título</th>
-                                <th>Descrição</th>
-                                <th>Complexidade</th>
-                                <th>Data Estimada</th>
-                                <th>Valor Pagamento</th>
+                                <th>Nome</th>
+                                <th>Cor</th>
+                                <th>Última Atualização</th>
                                 <th>Data de Criação</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @each('admin.servico.servico', $servicos, 'servico')
+                            @each('admin.status.status', $statuses, 'status')
                         </tbody>
                     </table>
                     {{-- @if ($usuarios->lastPage() > 1)

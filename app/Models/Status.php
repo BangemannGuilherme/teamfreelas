@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Solicitacoes extends Model
+class Status extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class Solicitacoes extends Model
      *
      * @var string
      */
-    protected $table = 'solicitacoes';
+    protected $table = 'status';
     protected $primaryKey = 'id';
 
     /**
@@ -24,24 +24,12 @@ class Solicitacoes extends Model
      */
     protected $fillable = [
         'id',
-        'servico_id',
-        'freelancer_id',
-        'status_id',
-        'mensagem'
+        'nome',
+        'cor'
     ];
 
-    public function servico()
+    public function solicitacoes()
     {
-        return $this->belongsTo(Servico::class);
-    }
-
-    public function freelancer()
-    {
-        return $this->belongsTo(Freelancer::class);
-    }
-
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
+        return $this->belongsToMany(Solicitacoes::class);
     }
 }

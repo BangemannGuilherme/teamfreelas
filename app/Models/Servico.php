@@ -35,4 +35,9 @@ class Servico extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
+
+    public function solicitacoes()
+    {
+        return $this->hasMany(Solicitacoes::class);
+    }
 }
