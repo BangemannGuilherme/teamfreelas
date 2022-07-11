@@ -66,6 +66,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('servicos/create', 'PrincipalController@servicoCreate')->name('servico.create');
     Route::post('servicos/create', 'PrincipalController@servicoStore')->name('servico.store');
     Route::get('servicos/{id}', 'PrincipalController@servicoShow')->name('servico.show');
+    Route::post('servicos/solicitacao', 'PrincipalController@solicitacaoPendente')->name('solicitacao');
 
     Route::post('solicitacao/create', 'PrincipalController@solicitacaoStore')->name('solicitacao.store');
 });
@@ -74,6 +75,6 @@ Route::middleware(['web'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('perfil/{username}', 'PrincipalController@perfilUsuario')->name('usuario.perfil');
     Route::post('perfil/{id}', 'PrincipalController@perfilUsuarioAtualizar')->name('usuario.perfil.update');
-    
-    Route::get('perfil/{username}/projetos', 'PrincipalController@projetosUsuario')->name('usuario.projetos');
+    Route::post('perfil/freelancer_{id}', 'PrincipalController@perfilFreelancerAtualizar')->name('freelancer.perfil.update');
+    Route::get('perfil/{username}/servicos', 'PrincipalController@servicosUsuario')->name('usuario.servicos');
 });

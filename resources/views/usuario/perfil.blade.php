@@ -28,8 +28,14 @@
                             {{ $usuario->celular }}, {{ $usuario->telefone_empresarial }}
                         </li>
                     </ul>
+                    
                     @include('usuario.edit')
                     {{-- <a class="btn btn-success btn-outline" href="{{ route('usuario.perfil.editar', ['username' => Auth::user()->username]) }}">Editar informações</a> --}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    <a class="btn btn-success" href="{{ route('usuario.servicos', ['username' => $usuario->username]) }}"><i class="fa-solid fa-laptop-code"></i> Projetos Cadastrados</a>
                 </div>
             </div>
         </div>
@@ -53,7 +59,7 @@
                         <li>
                             <span class="fa-regular fa-calendar"></span>
                             <label>Data Registro:</label>
-                            {{ $usuario->data_registro }}
+                            {{ Carbon\Carbon::parse($usuario->data_registro)->format('d/m/Y') }}
                         </li>
                         <li>
                             <span class="fa-solid fa-ranking-star"></span>
@@ -67,49 +73,6 @@
             </div>
         </div>
     </div>
-
-    <div class="col-md-12 widgets-perfil">
-        <h1 class="text-center"><label>PROJETOS CADASTRADOS</label></h1>
-        <div class="widgets-group">
-            <div class="col-md-12 widgets-subtitle"><h2 style="font-weight: bold;">&nbsp;Informações:</h2></div>
-            <div class="col-md-6">
-                <div class="widget ibox-content">
-                    <h2><label>Descriçao:</label>
-                        <p>{{ $usuario->descricao }}</p>
-                    </h2>
-                    <ul class="list-unstyled m-t-md">
-                        <li>
-                            <span class="fa-solid fa-circle-info"></span>
-                            <label>Título:</label>
-                            {{ $usuario->trofeu }}
-                        </li>
-                        <li>
-                            <span class="fa-regular fa-calendar"></span>
-                            <label>Data Estimada:</label>
-                            {{ $usuario->data_registro }}
-                        </li>
-                        <li>
-                            <span class="fa-solid fa-layer-group"></span>
-                            <label>Complexidade:</label>
-                            {{ $usuario->nome_habilidade }}
-                        </li>
-                        <li>
-                            <span class="fa-solid fa-sack-dollar"></span>
-                            <label>Valor Pagamento:</label>
-                            {{ $usuario->nome_habilidade }}
-                        </li>
-                    </ul>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <a class="btn btn-success" href="{{ route('usuario.projetos', ['username' => $usuario->username]) }}"><i class="fa-solid fa-laptop-code"></i> Projetos Cadastrados</a>
-                        </div>
-                    </div>
-                    {{-- <a class="btn btn-success btn-outline" href="{{ route('usuario.perfil.editar', ['username' => Auth::user()->username]) }}">Editar informações</a> --}}
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 </div>
 @endsection

@@ -7,14 +7,13 @@
             <div class="col-lg-12">
                 <div class="ibox">
                     <div class="ibox-title">
-                        <h5>All projects assigned to this account</h5>
+                        <h5>Meus projetos</h5>
                         <div class="ibox-tools">
-                            <a href="" class="btn btn-primary btn-xs">Create new project</a>
+                            <a href="{{ route('servico.create') }}" class="btn btn-primary btn-xs">Criar novo projeto</a>
                         </div>
                     </div>
                     <div class="ibox-content">
                         <div class="m-b-sm m-t-sm">
-
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <button tabindex="-1" class="btn btn-white btn-sm" type="button"><i class="fa fa-refresh"></i> Refresh</button>
@@ -31,7 +30,7 @@
 
                             <table class="table table-hover">
                                 <tbody>
-                                    @each('usuario.projeto', $projetos, 'projeto')
+                                    @each('usuario.servico', $servicos, 'servico')
                                 </tbody>
                             </table>
                         </div>

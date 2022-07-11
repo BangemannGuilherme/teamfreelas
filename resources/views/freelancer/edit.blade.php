@@ -14,7 +14,7 @@
                 <small class="font-bold">Aqui você pode editar as informações do seu perfil. Só modifique o que realmente deseja atualizar.</small>
             </div>
             <!-- Modal Body -->
-            <form class="m-t" role="form" method="POST" action="{{ route('usuario.perfil.update', ['id' => Auth::user()->id]) }}" style="margin-bottom: 0 !important;">
+            <form class="m-t" role="form" method="POST" action="{{ route('freelancer.perfil.update', ['id' => Auth::user()->id]) }}" style="margin-bottom: 0 !important;">
                 @csrf
                 <div class="modal-body">
                     <!-- Modal Campos -->
@@ -27,22 +27,22 @@
                             </div>
                             <div class="widget no-padding widget-margin white-bg col-md-12">
                                 <h3 for="descricao">Descrição:</h3>
-                                <textarea id="descricao" name="usuario_nome" type="text" placeholder="Descrição" class="form-control" value="{{}}" disabled> </textarea>
+                                <textarea id="descricao" name="freelancer_descricao" type="text" placeholder="Descrição" class="form-control" value="{{ $usuario->descricao}}" disabled> </textarea>
                                 <label id="descricao_editar" data-toggle="button" class="btn btn-success btn-outline form-control" type="button" aria-pressed="false"><i class="fa-solid fa-pen-to-square"></i> Editar</label>
                             </div>
                             {{-- <div class="widget no-padding widget-margin white-bg col-md-12">
                                 <h3 for="sobrenome">Sobrenome:</h3>
-                                <input id="sobrenome" name="usuario_sobrenome" type="text" placeholder="Sobrenome" class="form-control" value="{{ $usuario->sobrenome }}" disabled>
+                                <input id="sobrenome" name="usuario_sobrenome" type="text" placeholder="Sobrenome" class="form-control" value="" disabled>
                                 <label id="sobrenome_editar" data-toggle="button" class="btn btn-success btn-outline form-control" type="button" aria-pressed="false"><i class="fa-solid fa-pen-to-square"></i> Editar</label>
                             </div> --}}
-                            <div class="widget no-padding widget-margin white-bg col-md-6">
+                            {{-- <div class="widget no-padding widget-margin white-bg col-md-6">
                                 <h3 for="email">Habilidades:</h3>
                                 <input id="email" name="usuario_email" type="email" placeholder="Habilidades" class="form-control" value="" disabled>
                                 <label id="email_editar" data-toggle="button" class="btn btn-success btn-outline form-control" type="button" aria-pressed="false"><i class="fa-solid fa-pen-to-square"></i> Editar</label>
-                            </div>
+                            </div> --}}
                             {{-- <div class="widget no-padding widget-margin white-bg col-md-6">
                                 <h3 for="data_nascimento">Data de Nascimento:</h3>
-                                <input id="data_nascimento" name="usuario_data_nascimento" type="date" placeholder="Data de Nascimento" class="form-control" value="{{ $usuario->data_nascimento }}" disabled>
+                                <input id="data_nascimento" name="usuario_data_nascimento" type="date" placeholder="Data de Nascimento" class="form-control" value="" disabled>
                                 <label id="data_nascimento_editar" data-toggle="button" class="btn btn-success btn-outline form-control" type="button" aria-pressed="false"><i class="fa-solid fa-pen-to-square"></i> Editar</label>
                             </div> --}}
                         </div>
@@ -88,4 +88,4 @@
     }
 </style>
 
-@include('usuario.javascript')
+@include('freelancer.javascript')

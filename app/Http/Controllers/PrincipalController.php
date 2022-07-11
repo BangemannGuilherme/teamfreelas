@@ -102,15 +102,61 @@ class PrincipalController extends Controller
         }
     }
 
-    public function projetosUsuario($username)
+    public function perfilFreelancerAtualizar(Request $request, $user_id)
+    {
+        try
+        {
+            $data = $request->all();
+
+            foreach ($data as $key => $value) {
+                $table = explode('_', $key);
+                $column = strval($table[1]);
+
+                if ( isset($table[2]) )
+                {
+                    $column .= '_'.$table[2];
+                }
+
+                if ( $table[0] !== "" || $table[0] !== null )
+                {
+                    if ( $table[0] === 'freelancer' )
+                    {
+                        $freelancer = User::where('id', $user_id)->first();
+                        if ( $freelancer )
+                        {
+                            $freelancer->$column = $data[$key];
+                            $freelancer->save();
+                        }
+                    }
+                }
+            }
+
+            return redirect()->route('usuario.perfil', ['username' => Auth::user()->username]);
+        }
+        catch(Exception $e)
+        {
+            Log::error('[perfilUsuarioAtualizar] Erro ao salvar os dados do Usuário. Error ' . $e->getCode() . ': ' . $e->getMessage() . '; File: ' . $e->getFile() . '; Line: ' . $e->getLine());
+
+            return [
+                'success' => false,
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'error' => 'error'
+            ];
+        }
+    }
+
+    public function servicosUsuario($username)
     {
         if ( Auth::check() && Auth::user()->username == $username )
         {
             $cliente = Cliente::where('user_id', Auth::id())->first();
 
-            $projetos = Servico::where('cliente_id', $cliente->id)->orderBy('created_at', 'ASC')->get();
-
-            return view('usuario.projetos', compact('projetos'));
+            $servicos = Servico::where('cliente_id', $cliente->id)->orderBy('created_at', 'ASC')->get();
+    
+            return view('usuario.servicos', compact('servicos'));
         }
         else
         {
@@ -160,16 +206,67 @@ class PrincipalController extends Controller
         return view('servico.show', compact('servico'));
     }
 
+    public function solicitacaoPendente(Request $request)
+    {
+        try
+        {
+            $servico_id = $request->get('servico_id');
+            $solicitacoes = Solicitacoes::where('servico_id', $servico_id)->get();
+
+            return [
+                'success' => true,
+                'message' => 'Solicitações consultadas com sucesso!',
+                'data' => $solicitacoes
+            ];
+        }
+        catch(Exception $e)
+        {
+            Log::error('[Principal - solicitacaoPendente] Erro ao realizar a consulta. Error ' . $e->getCode() . ': ' . $e->getMessage() . '; File: ' . $e->getFile() . '; Line: ' . $e->getLine());
+
+            return [
+                'success' => false,
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'error' => 'error'
+            ];
+        }
+    }
+    
+
     public function solicitacaoStore(Request $request)
     {
-        $freelancer = Freelancer::where('user_id', $request->input('user_id'))->first();
+        try
+        {
+            $freelancer = Freelancer::where('user_id', $request->get('user_id'))->first();
 
-        $solicitacao = Solicitacoes::create([
-            'servico_id' => $request->input('servico_id'),
+            $solicitacao = Solicitacoes::create([
+            'servico_id' => $request->get('servico_id'),
             'freelancer_id' => $freelancer->id,
             'status_id' => 1,
-            'mensagem' => $request->input('mensagem'),
-        ]);
+            'mensagem' => $request->get('mensagem'),
+            ]);
+
+            return [
+                'success' => true,
+                'message' => 'Solicitação enviada com sucesso!'
+            ];
+        }
+        catch(Exception $e)
+        {
+            Log::error('[Principal - solicitacaoPendente] Erro ao realizar a consulta. Error ' . $e->getCode() . ': ' . $e->getMessage() . '; File: ' . $e->getFile() . '; Line: ' . $e->getLine());
+
+            return [
+                'success' => false,
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'error' => 'error'
+            ];
+        }
+        
 
         return redirect()->route('servico.show', ['id' => $request->input('servico_id')]);
     }

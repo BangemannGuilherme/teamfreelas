@@ -27,7 +27,7 @@
                 <!-- Modal Footer -->
                 <div class="modal-footer modal-btn blue-bg">
                     <!-- Modal Botões -->
-                    <button type="submit" class="btn btn-default btn-outline" title="Enviar solicitação de proposta ao cliente"><i class="fa-solid fa-check-double"></i> Enviar solicitação</button>
+                    <button type="button" class="btn btn-default btn-outline" title="Enviar solicitação de proposta ao cliente" onclick="enviaSolicitacao({{ $servico->id }})"><i class="fa-solid fa-check-double"></i> Enviar solicitação</button>
                     <button type="button" class="btn btn-default btn-outline" title="Cancelar" class="close" data-dismiss="modal"><i class="fa-solid fa-xmark"></i> Cancelar</button>
                 </div>
             </form>
@@ -49,3 +49,25 @@
         border-color: white;
     }
 </style>
+<script>
+function enviaSolicitacao(id)
+    {
+        let user_id = $('[name="user_id"]').val();
+        let mensagem = $('[name="mensagem"]').val();
+        $.ajax({
+            url: '{{ route('solicitacao.store') }}',
+            method: 'POST',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "servico_id": id,
+                 "user_id": user_id,
+                 "mensagem": mensagem
+            },
+            success: function(data) {
+                swal('Sucesso!','Solicitação enviada com Sucesso!','success');
+                $('#enviarSolicitacao').modal('toggle');
+                $('[name="mensagem"]').val("");
+            }
+        });
+    }
+</script>
